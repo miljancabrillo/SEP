@@ -1,2 +1,2 @@
 # SEP
-SEP 2019/2020
+SEP project 2019/2020
