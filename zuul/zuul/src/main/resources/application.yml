@@ -1,18 +1,69 @@
-server:
+# server:
+#   ssl:
+#     enabled: true
+#     key-store: classpath:zuulkeystore.jks
+#     key-store-password: zuulpass
+#     key-alias: zuul
+#     keyStoreType: pkcs12
+# 
+# zuul:
+#    host:
+#       socket-timeout-millis: 30000
+#    sslHostnameValidationEnabled: false
+# 
+# security:
+#    require-ssl: true
+# 
+# ribbon:
+#   IsSecure: true
+#   ConnectTimeout: 10000
+#   ReadTimeout: 10000
+#   TrustStore: classpath:zuulkeystore.jks
+#   TrustStorePassword : zuulpass
+#   IsHostnameValidationRequired: false
+#  
+# eureka:
+#   instance:
+#     nonSecurePortEnabled: false
+#     securePortEnabled: true
+#     securePort: ${server.port}
+
+
+spring:
+  application:
+    name: zuul
+server:  
+  port: ${PORT:8672}
   ssl:
     enabled: true
     key-store: classpath:zuulkeystore.jks
     key-store-password: zuulpass
     key-alias: zuul
-    keyStoreType: pkcs12
-
-ribbon:
-  IsSecure: true
-  TrustStore: classpath:zuulkeystore.jks
-  TrustStorePassword : zuulpass
- 
+    
+security:
+  require-ssl: true
 eureka:
   instance:
+    hostname: localhost
+    prefer-ip-address: true
     nonSecurePortEnabled: false
     securePortEnabled: true
     securePort: ${server.port}
+  client:
+    securePortEnabled: true
+    serviceUrl:
+      defaultZone: https://localhost:8761/eureka/ 
+zuul:
+  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
+  host:
+    socket-timeout-millis: 30000
+  sslHostnameValidationEnabled: false
+ribbon:
+  IsSecured: true
+  ConnectTimeout:  10000
+  ReadTimeout:  10000
+  eureka:
+    enabled: true
+  TrustStore: classpath:zuulkeystore.jks
+  TrustStorePassword : zuulpass
+  IsHostnameValidationRequired: false

@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: eureka
+
+server:
+  port: 8761
+  ssl:
+    enabled: true
+    client-auth: need
+    key-store: classpath:eurekakeystore.jks
+    key-store-password: eurekapass
+    key-alias: eureka
+    trust-store: classpath:eurekakeystore.jks
+    trust-store-password: eurekapass
+
+eureka:
+  instance:
+    hostname: localhost
+    securePort: ${server.port}
+    securePortEnabled: true
+    prefer-ip-address: true
+    nonSecurePortEnabled: false 
+  client:
+    registerWithEureka: false
+    fetchRegistry: false

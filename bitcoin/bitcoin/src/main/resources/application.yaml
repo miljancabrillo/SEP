@@ -1,20 +1,6 @@
-# server:
-#   ssl:
-#     enabled: true
-#     key-store: classpath:bankkeystore.jks
-#     key-store-password: bankpass
-#     key-alias: bank
-#     keyStoreType: pkcs12
-# 
-# eureka:
-#   instance:
-#     nonSecurePortEnabled: false
-#     securePortEnabled: true
-#     securePort: ${server.port}
-
 
 server:  
-  port: ${PORT:8300}
+  port: ${PORT:8400}
   ssl:
     enabled: true
     key-store: ${KEY_STORE_CLASSPATH}
@@ -35,4 +21,4 @@ eureka:
       defaultZone: ${CLIENT_SERVICEURL_DEFAULTZONE}
 spring:
   application:
-    name: bank
+    name: bitcoin
