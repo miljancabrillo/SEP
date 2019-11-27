@@ -1,0 +1,18 @@
+server:
+  ssl:
+    enabled: true
+    key-store: classpath:zuulkeystore.jks
+    key-store-password: zuulpass
+    key-alias: zuul
+    keyStoreType: pkcs12
+
+ribbon:
+  IsSecure: true
+  TrustStore: classpath:zuulkeystore.jks
+  TrustStorePassword : zuulpass
+ 
+eureka:
+  instance:
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}

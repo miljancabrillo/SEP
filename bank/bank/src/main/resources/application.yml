@@ -1,0 +1,13 @@
+server:
+  ssl:
+    enabled: true
+    key-store: classpath:bankkeystore.jks
+    key-store-password: bankpass
+    key-alias: bank
+    keyStoreType: pkcs12
+
+eureka:
+  instance:
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}
