@@ -31,11 +31,6 @@ public class BitcoinApplication {
 	}
 
 	public static void main(String[] args) {
-		System.setProperty("KEY_STORE_CLASSPATH", "src/main/resources/bitcoinkeystore.jks");
-		System.setProperty("KEY_STORE_PASSWORD", "bitcoinpass");
-		System.setProperty("KEY_ALIAS", "bitcoin");
-		System.setProperty("EUREKA_INSTANCE_HOSTNAME", "localhost");
-		System.setProperty("CLIENT_SERVICEURL_DEFAULTZONE", "https://localhost:8761/eureka/");
 		SpringApplication.run(BitcoinApplication.class, args);
 	}
 

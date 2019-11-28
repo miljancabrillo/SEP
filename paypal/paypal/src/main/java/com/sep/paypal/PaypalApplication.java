@@ -31,11 +31,6 @@ public class PaypalApplication {
 	}
 	
 	public static void main(String[] args) {
-		System.setProperty("KEY_STORE_CLASSPATH", "src/main/resources/paypalkeystore.jks");
-		System.setProperty("KEY_STORE_PASSWORD", "paypalpass");
-		System.setProperty("KEY_ALIAS", "paypal");
-		System.setProperty("EUREKA_INSTANCE_HOSTNAME", "localhost");
-		System.setProperty("CLIENT_SERVICEURL_DEFAULTZONE", "https://localhost:8761/eureka/");
 		SpringApplication.run(PaypalApplication.class, args);
 	}
 

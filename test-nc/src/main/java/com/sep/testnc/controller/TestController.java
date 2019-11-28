@@ -1,19 +1,22 @@
-package com.sep.bank.controller;
+package com.sep.testnc.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-@RequestMapping("/")
 @RestController
+@RequestMapping("/")
 public class TestController {
 
-	@RequestMapping("/test")
+	
+	@RequestMapping("")
 	public String test() {
+		
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> response = restTemplate.getForEntity("http://localhost:11000/test", String.class);
-		return "Bank test successful!" + "\nRecived data:" + response.getBody();
+		ResponseEntity<String> response = restTemplate.getForEntity("https://localhost:8672/bank/test", String.class);
+		
+		return "NC test works! Recived data: " + response.getBody();
 	}
 	
 }

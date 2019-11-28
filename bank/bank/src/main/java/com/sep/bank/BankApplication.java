@@ -31,11 +31,6 @@ public class BankApplication {
 	}
 
 	public static void main(String[] args) {
-		System.setProperty("KEY_STORE_CLASSPATH", "src/main/resources/bankkeystore.jks");
-		System.setProperty("KEY_STORE_PASSWORD", "bankpass");
-		System.setProperty("KEY_ALIAS", "bank");
-		System.setProperty("EUREKA_INSTANCE_HOSTNAME", "localhost");
-		System.setProperty("CLIENT_SERVICEURL_DEFAULTZONE", "https://localhost:8761/eureka/");
 		SpringApplication.run(BankApplication.class, args);
 	}
 
