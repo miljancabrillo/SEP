@@ -9,7 +9,7 @@ public class TestController {
 
 	@RequestMapping("/test")
 	public String test() {
-		return "Test bank data!";
+		return "  [from test bank]  ";
 	}
 	
 }

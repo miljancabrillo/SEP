@@ -13,7 +13,7 @@ public class TestController {
 	public String test() {
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<String> response = restTemplate.getForEntity("http://localhost:11000/test", String.class);
-		return "Bank test successful!" + "\nRecived data:" + response.getBody();
+		return "  [from bank service]  " + response.getBody();
 	}
 	
 }

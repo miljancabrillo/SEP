@@ -16,7 +16,7 @@ public class TestController {
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<String> response = restTemplate.getForEntity("https://localhost:8672/bank/test", String.class);
 		
-		return "NC test works! Recived data: " + response.getBody();
+		return "  [from test NC]  " + response.getBody();
 	}
 	
 }
