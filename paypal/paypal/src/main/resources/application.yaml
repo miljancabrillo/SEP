@@ -2,7 +2,7 @@ server:
   port: 8200
   ssl:
     enabled: true
-    key-store: classpath:paypalkeystore.jks
+    key-store: classpath:paypalkeystore.ks
     key-store-password: paypalpass
     key-alias: paypal
 security:

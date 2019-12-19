@@ -1,0 +1,8 @@
+server:
+  ssl:
+    enabled: false
+    key-store: classpath:nckeystore.ks
+    key-store-password: ncpass
+    key-alias: nc
+    trust-store: classpath:nckeystore.ks
+    trust-store-password: ncpass

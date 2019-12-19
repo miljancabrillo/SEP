@@ -3,7 +3,7 @@ server:
   port: 8400
   ssl:
     enabled: true
-    key-store: classpath:bitcoinkeystore.jks
+    key-store: classpath:bitcoinkeystore.ks
     key-store-password: bitcoinpass
     key-alias: bitcoin
 security:

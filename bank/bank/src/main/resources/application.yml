@@ -2,7 +2,7 @@ server:
   port: 8300
   ssl:
     enabled: true
-    key-store: classpath:bankkeystore.jks
+    key-store: classpath:bankkeystore.ks
     key-store-password: bankpass
     key-alias: bank
 security:

@@ -1,0 +1,47 @@
+spring:
+   application:
+      name: sellers
+   datasource:
+      username: sellersdb
+      password: sellersdb
+      url: jdbc:mysql://localhost:3306/sellers_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+   jpa:
+      properties:
+         hibernate:
+            dialect: org.hibernate.dialect.MySQL5Dialect
+      generate-ddl: true
+      hibernate:
+         ddl-auto: create
+      show-sql: true
+logging:
+   level:
+      org: 
+         hibernate:
+            web: DEBUG
+         springframework:
+            web: DEBUG    
+server:
+   port: 8500
+   ssl:
+    client-auth: need
+    enabled: true
+    key-store: classpath:sellerskeystore.ks
+    key-store-password: sellerspass
+    key-alias: sellers
+    trust-store: classpath:sellerskeystore.ks
+    trust-store-password: sellerspass
+security:
+  require-ssl: true
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: false
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}
+  client:
+    securePortEnabled: true
+    serviceUrl:
+      defaultZone: https://localhost:8761/eureka/
+
+   

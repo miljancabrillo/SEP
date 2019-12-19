@@ -4,11 +4,15 @@ spring:
 server:  
   port: 8672
   ssl:
+    client-auth: want
     enabled: true
     key-store: classpath:zuulkeystore.jks
     key-store-password: zuulpass
     key-alias: zuul
-    
+
+http:
+   port: 8673
+
 security:
   require-ssl: true
 eureka:
@@ -23,6 +27,7 @@ eureka:
     serviceUrl:
       defaultZone: https://localhost:8761/eureka/ 
 zuul:
+  sensitiveHeaders: Cookie,Set-Cookie
   ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
   host:
     socket-timeout-millis: 30000
@@ -36,3 +41,4 @@ ribbon:
   TrustStore: classpath:zuulkeystore.jks
   TrustStorePassword : zuulpass
   IsHostnameValidationRequired: false
+     

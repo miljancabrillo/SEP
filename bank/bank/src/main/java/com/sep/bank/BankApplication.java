@@ -17,9 +17,9 @@ public class BankApplication {
 	@Bean
 	public DiscoveryClient.DiscoveryClientOptionalArgs discoveryClientOptionalArgs() throws NoSuchAlgorithmException {
 		DiscoveryClient.DiscoveryClientOptionalArgs args = new DiscoveryClient.DiscoveryClientOptionalArgs();
-		System.setProperty("javax.net.ssl.keyStore", "src/main/resources/bankkeystore.jks");
+		System.setProperty("javax.net.ssl.keyStore", "src/main/resources/bankkeystore.ks");
 		System.setProperty("javax.net.ssl.keyStorePassword", "bankpass");
-		System.setProperty("javax.net.ssl.trustStore", "src/main/resources/bankkeystore.jks");
+		System.setProperty("javax.net.ssl.trustStore", "src/main/resources/bankkeystore.ks");
 		System.setProperty("javax.net.ssl.trustStorePassword", "bankpass");
 		EurekaJerseyClientBuilder builder = new EurekaJerseyClientBuilder();
 		builder.withClientName("bank");

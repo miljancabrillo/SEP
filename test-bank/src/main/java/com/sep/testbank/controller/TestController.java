@@ -11,5 +11,4 @@ public class TestController {
 	public String test() {
 		return "  [from test bank]  ";
 	}
-	
 }

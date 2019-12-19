@@ -16,4 +16,8 @@ public class TestController {
 		return "  [from bank service]  " + response.getBody();
 	}
 	
+	@RequestMapping("/api/test")
+	public String testAPI() {
+		return "  API TEST  ";
+	}
 }

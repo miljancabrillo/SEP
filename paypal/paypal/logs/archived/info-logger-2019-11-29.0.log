@@ -1,0 +1,6 @@
+2019-11-29 00:05:13,577 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-11-29 00:05:22,926 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started PaypalApplication in 11.871 seconds (JVM running for 12.721)
+2019-11-29 13:05:34,204 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-11-29 13:05:43,652 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started PaypalApplication in 12.114 seconds (JVM running for 13.165)
+2019-11-29 17:17:30,429 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-11-29 17:18:19,635 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started PaypalApplication in 62.632 seconds (JVM running for 66.455)

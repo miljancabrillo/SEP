@@ -17,9 +17,9 @@ public class PaypalApplication {
 	@Bean
 	public DiscoveryClient.DiscoveryClientOptionalArgs discoveryClientOptionalArgs() throws NoSuchAlgorithmException {
 		DiscoveryClient.DiscoveryClientOptionalArgs args = new DiscoveryClient.DiscoveryClientOptionalArgs();
-		System.setProperty("javax.net.ssl.keyStore", "src/main/resources/paypalkeystore.jks");
+		System.setProperty("javax.net.ssl.keyStore", "src/main/resources/paypalkeystore.ks");
 		System.setProperty("javax.net.ssl.keyStorePassword", "paypalpass");
-		System.setProperty("javax.net.ssl.trustStore", "src/main/resources/paypalkeystore.jks");
+		System.setProperty("javax.net.ssl.trustStore", "src/main/resources/paypalkeystore.ks");
 		System.setProperty("javax.net.ssl.trustStorePassword", "paypalpass");
 		EurekaJerseyClientBuilder builder = new EurekaJerseyClientBuilder();
 		builder.withClientName("paypal");
