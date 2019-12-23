@@ -6,7 +6,7 @@ server:
     key-store-password: paypalpass
     key-alias: paypal
 security:
-  require-ssl: true
+  require-ssl: false
 eureka:
   instance:
     hostname: localhost
@@ -21,3 +21,22 @@ eureka:
 spring:
   application:
     name: paypal
+  datasource:
+     username: paypaldb
+     password: paypaldb
+     url: jdbc:mysql://localhost:3306/sellers_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+  jpa:
+     properties:
+        hibernate:
+           dialect: org.hibernate.dialect.MySQL5Dialect
+     generate-ddl: true
+     hibernate:
+        ddl-auto: create
+     show-sql: true
+logging:
+  level:
+     org: 
+        hibernate:
+           web: DEBUG
+        springframework:
+           web: DEBUG   

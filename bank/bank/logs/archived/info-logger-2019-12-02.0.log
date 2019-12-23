@@ -1,6 +1,0 @@
-2019-12-02 20:38:49,367 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-02 20:38:59,629 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 12.98 seconds (JVM running for 13.976)
-2019-12-02 20:41:13,201 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-02 20:41:22,425 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 12.048 seconds (JVM running for 12.993)
-2019-12-02 20:43:41,459 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-02 20:43:51,513 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 12.737 seconds (JVM running for 13.815)

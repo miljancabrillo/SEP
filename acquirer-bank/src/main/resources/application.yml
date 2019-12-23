@@ -1,0 +1,31 @@
+server:  
+  port: 11000
+  ssl:
+    enabled: true
+    key-store: classpath:acquirerkeystore.ks
+    key-store-password: acquirerpass
+    key-alias: acquirer
+security:
+  require-ssl: true
+spring:
+  application:
+    name: acquirer_bank
+  datasource:
+     username: acquirerdb
+     password: acquirerdb
+     url: jdbc:mysql://localhost:3306/acquirer_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+  jpa:
+     properties:
+        hibernate:
+           dialect: org.hibernate.dialect.MySQL5Dialect
+     generate-ddl: true
+     hibernate:
+        ddl-auto: update
+     show-sql: true
+logging:
+  level:
+     org: 
+        hibernate:
+           web: DEBUG
+        springframework:
+           web: DEBUG    

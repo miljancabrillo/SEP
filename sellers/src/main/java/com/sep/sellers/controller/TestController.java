@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sep.sellers.dto.PaymentRequestDTO;
 import com.sep.sellers.security.JwtConfig;
+import com.sep.sellers.service.SellersService;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -19,6 +21,9 @@ public class TestController {
 	
 	@Autowired
 	JwtConfig jwtConfig;
+	
+	@Autowired
+	SellersService sellersService;
 
 	@PostMapping("/getJWT")
 	public ResponseEntity<String> getJWT(){
@@ -37,6 +42,11 @@ public class TestController {
 	@GetMapping("/test")
 	public String test() {
 		return "test";
+	}
+	
+	@GetMapping("/testPaymentUrl")
+	public ResponseEntity<String> testPaymentUrl(){
+		return new ResponseEntity<String>(sellersService.generatePaymentUrl(new PaymentRequestDTO(1, 10, "RSD")), HttpStatus.OK);
 	}
 	
 }

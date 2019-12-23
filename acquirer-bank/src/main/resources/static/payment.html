@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <script src="jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="bootstrap.min.js"></script>
+    <script src="payment.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6 pt-5 mt-5">
+                <h3>Credit card information: </h3>
+                <form class="pt-2">
+                    <div class="form-group">
+                    <input type="text" class="form-control" id="pan" minlength="10" maxlength="10" aria-describedby="emailHelp" placeholder="Enter PAN(10 characters)">
+                    <small id="panError" class="form-text text-muted">Invalid PAN!</small>
+                    </div>
+                    <div class="form-group">
+                    <input type="number" minlength="3" maxlength="4" class="form-control" id="securityCode" placeholder="Enter security code(3 or 4 digits)">
+                    <small id="securityCodeError" class="form-text text-muted">Invalid security code!</small>
+                    </div>
+                    <div class="form-group">
+                    <input type="text" class="form-control" id="cardHolderName" placeholder="Enter cardholder name">
+                    <small id="cardHolderNameError" class="form-text text-muted">Card holder name must not be empty!</small>
+                    </div>
+                    <div class="form-group ">
+                        <input type="text" class="form-control" id="expirationDate" placeholder="Enter card expiration date (mm/yy)">
+                        <small id="expirationDateError" class="form-text text-muted">Invalid expiration date!</small>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="payButton" class="btn btn-primary float-right">Pay</button>            
+                    </div>
+                </form>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+</body>
+
+</html>

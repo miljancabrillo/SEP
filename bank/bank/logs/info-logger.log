@@ -1,12 +1,15 @@
-2019-12-03 13:45:35,894 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-03 13:46:05,710 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 41.891 seconds (JVM running for 44.775)
-2019-12-03 17:27:11,901 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-03 17:27:46,448 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 47.616 seconds (JVM running for 51.943)
-2019-12-03 17:28:30,412 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-03 17:28:49,748 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 23.968 seconds (JVM running for 26.153)
-2019-12-03 17:51:34,927 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-03 17:51:55,245 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 28.457 seconds (JVM running for 30.855)
-2019-12-03 17:57:07,165 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-03 17:57:16,281 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 11.475 seconds (JVM running for 12.39)
-2019-12-03 18:01:00,386 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-03 18:01:11,772 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 13.87 seconds (JVM running for 14.756)
+2019-12-23 19:16:23,658 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-23 19:18:18,770 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-23 19:19:19,250 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-23 19:19:39,484 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 23.08 seconds (JVM running for 24.043)
+2019-12-23 19:21:16,412 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-23 20:30:13,185 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-23 20:30:38,047 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 34.231 seconds (JVM running for 36.642)
+2019-12-23 20:34:39,320 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-23 20:34:54,674 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 17.92 seconds (JVM running for 18.889)
+2019-12-23 20:36:04,209 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-23 20:36:19,586 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 18.09 seconds (JVM running for 19.277)
+2019-12-23 20:47:55,796 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-23 20:48:12,199 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 18.858 seconds (JVM running for 19.836)
+2019-12-23 20:51:44,320 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-23 20:52:07,177 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 25.555 seconds (JVM running for 26.531)

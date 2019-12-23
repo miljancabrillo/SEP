@@ -2,20 +2,20 @@ package com.sep.sellers.dto;
 
 public class RegistrationRequestDTO {
 
-	private long merchantId;
+	private long sellerId;
 	private String registrationUrl;
 	
-	public RegistrationRequestDTO(long merchantId, String registrationUrl) {
+	public RegistrationRequestDTO(long sellerId, String registrationUrl) {
 		super();
-		this.merchantId = merchantId;
+		this.sellerId = sellerId;
 		this.registrationUrl = registrationUrl;
 	}
 	
-	public long getMerchantId() {
-		return merchantId;
+	public long getSellerId() {
+		return sellerId;
 	}
-	public void setMerchantId(long merchantId) {
-		this.merchantId = merchantId;
+	public void setSellerId(long merchantId) {
+		this.sellerId = merchantId;
 	}
 	public String getRegistrationUrl() {
 		return registrationUrl;

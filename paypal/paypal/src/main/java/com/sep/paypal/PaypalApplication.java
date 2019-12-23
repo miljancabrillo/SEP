@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.netflix.discovery.DiscoveryClient;
 import com.netflix.discovery.shared.transport.jersey.EurekaJerseyClientImpl.EurekaJerseyClientBuilder;
+import com.sep.paypal.utils.TokenUtils;
 
 @EnableEurekaClient
 @SpringBootApplication

@@ -40,8 +40,8 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
 		    .antMatchers("/registration").permitAll()
 		    // any other requests must be authenticated*/
 		    //.antMatchers("/test/**").permitAll()
-		    .anyRequest().authenticated();
-		    //.anyRequest().permitAll();
+		    //.anyRequest().authenticated();
+		    .anyRequest().permitAll();
 
 	}
 	
