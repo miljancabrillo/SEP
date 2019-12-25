@@ -1,2 +1,20 @@
-2019-12-02 20:46:39,788 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-02 20:46:48,739 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 11.622 seconds (JVM running for 12.725)
+2019-12-25 14:28:29,520 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-25 14:42:28,334 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-25 14:45:27,197 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-25 14:45:49,272 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 26.224 seconds (JVM running for 27.954)
+2019-12-25 15:03:42,956 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-25 15:04:02,656 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 23.513 seconds (JVM running for 25.446)
+2019-12-25 15:05:55,608 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-25 15:06:15,854 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 24.412 seconds (JVM running for 26.402)
+2019-12-25 15:09:27,947 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-25 15:09:47,588 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 24.204 seconds (JVM running for 26.209)
+2019-12-25 15:11:41,496 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-25 15:12:54,157 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-25 15:13:14,278 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 24.264 seconds (JVM running for 26.151)
+2019-12-25 15:13:45,832 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-25 15:14:26,910 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-25 15:14:46,885 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 23.991 seconds (JVM running for 25.957)
+2019-12-25 15:16:47,181 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-25 15:17:08,376 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 25.3 seconds (JVM running for 27.328)
+2019-12-25 15:20:00,817 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-12-25 15:20:21,886 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 25.175 seconds (JVM running for 27.182)
