@@ -1,4 +1,0 @@
-2019-12-03 13:35:44,396 DEBUG org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter [http-nio-8673-exec-3] Checking secure context token: null
-2019-12-03 13:35:44,480 DEBUG org.springframework.security.web.authentication.preauth.x509.X509AuthenticationFilter [http-nio-8673-exec-3] No client certificate found in request.
-2019-12-03 13:37:27,297 DEBUG org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter [http-nio-8673-exec-1] Checking secure context token: null
-2019-12-03 13:37:27,298 DEBUG org.springframework.security.web.authentication.preauth.x509.X509AuthenticationFilter [http-nio-8673-exec-1] No client certificate found in request.
