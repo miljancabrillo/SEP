@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <script src="jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="bootstrap.min.js"></script>
+    <script src="test.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6 pt-5 mt-5">
+                <h3>Payment: </h3>
+                <form class="pt-2">
+                    <div class="form-group">
+                    <input type="number" class="form-control" id="price" placeholder="Enter price">
+                    <small id="priceError" class="form-text text-danger" >Price cannot be empty!</small>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="checkOutButton" class="btn btn-primary float-right">Check out</button>            
+                    </div>
+                </form>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+</body>
+
+</html>

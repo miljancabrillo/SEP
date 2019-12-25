@@ -39,7 +39,16 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
 		   // .antMatchers(HttpMethod.POST, "/getJWT").permitAll()
 		    //.antMatchers("/registration").permitAll()
 		    // any other requests must be authenticated*/
-		    .antMatchers("/pay/success/**").permitAll()
+		    .antMatchers("/success*").permitAll()
+		    .antMatchers("/cancel*").permitAll()
+		    .antMatchers("/success.html").permitAll()
+		    .antMatchers("/failure.html").permitAll()
+		    .antMatchers("/error.html").permitAll()
+		    .antMatchers("/confirmPayment.html*").permitAll()
+		    .antMatchers("/confirmPayment.js").permitAll()
+		    .antMatchers("/paymentOrderAmount").permitAll()
+		    .antMatchers("/boot*").permitAll()
+		    .antMatchers("/jquery*").permitAll()
 		    .anyRequest().authenticated();
 		    //.anyRequest().permitAll();
 

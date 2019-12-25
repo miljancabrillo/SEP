@@ -8,18 +8,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.sep.bank.model.PaymentRequest;
-import com.sep.bank.model.PaymentResponse;
+import com.sep.bank.model.AcquirerRequest;
+import com.sep.bank.model.AcquirerResponse;
 import com.sep.bank.model.Seller;
-import com.sep.bank.repository.PaymentRepository;
+import com.sep.bank.repository.PaymentOrderRepository;
 import com.sep.bank.repository.SellersRepository;
-import com.sep.bank.model.Payment;
-import com.sep.bank.model.PaymentInitiationRequest;
+import com.sep.bank.model.PaymentOrder;
+import com.sep.bank.model.PaymentOrderStatus;
+import com.sep.bank.model.PaymentRequest;
 
 @Service
 public class BankService {
 	
 	private static String BANK_URL = "https://localhost:11000";
+	private static String KP_URL = "https://localhost:8672/bank";
 	
 	@Autowired
 	RestTemplate restTemplate;
@@ -28,37 +30,42 @@ public class BankService {
 	SellersRepository sellerRepository;
 	
 	@Autowired
-	PaymentRepository paymentRepository;
+	PaymentOrderRepository paymentOrderRepository;
 
-	public PaymentResponse createOrder(PaymentInitiationRequest pir) {
+	public AcquirerResponse createOrder(PaymentRequest pr) {
 		
-		//Seller seller = sellerRepository.findOneById(pir.getSellerId());
+		Seller seller = sellerRepository.findOneById(pr.getSellerId());
 		
-		Seller seller = new Seller(1, "merchantOne", "merchantPass");
+		PaymentOrder paymentOrder = new PaymentOrder();
+		paymentOrder.setSeller(seller);
+		paymentOrder.setAmount(pr.getPrice());
+		paymentOrder.setTimestamp(new Date());
+		paymentOrder = paymentOrderRepository.save(paymentOrder);
 		
-		Payment payment = new Payment();
-		payment.setSeller(seller);
-		payment.setAmount(pir.getPrice());
-		payment.setTimestamp(new Date());
-		payment = paymentRepository.save(payment);
+		AcquirerRequest ar = new AcquirerRequest();
 		
-		PaymentRequest por = new PaymentRequest();
+		ar.setMerchantId(seller.getMerchantId());
+		ar.setMerchantPassword(seller.getMerchantPassword());
+		ar.setAmount(pr.getPrice());
+		ar.setMerchantOrderId(paymentOrder.getId());
+		ar.setMerchantTimestamp(paymentOrder.getTimestamp());
+		ar.setSuccesUrl(KP_URL + "/success");
+		ar.setFailedUrl(KP_URL + "/failure");
+		ar.setErrorUrl(KP_URL + "/error");
 		
-		por.setMerchantId(seller.getMerchantId());
-		por.setMerchantPassword(seller.getMerchantPassword());
-		por.setAmount(pir.getPrice());
-		por.setMerchantOrderId(payment.getId());
-		por.setMerchantTimestamp(payment.getTimestamp());
-		por.setSuccesUrl("");
-		por.setFailedUrl("");
-		por.setErrorUrl("");
+		ResponseEntity<AcquirerResponse> response = restTemplate.postForEntity(BANK_URL + "/createPayment", ar, AcquirerResponse.class);
 		
-		ResponseEntity<PaymentResponse> response = restTemplate.postForEntity(BANK_URL + "/createPayment", por, PaymentResponse.class);
+		paymentOrder.setPaymentId(response.getBody().getPaymentId());
+		paymentOrderRepository.save(paymentOrder);
 		
 		return response.getBody();
 	}
 
-	
+	public void setPaymentOrderStatus(long id, PaymentOrderStatus status) {
+		PaymentOrder po = paymentOrderRepository.findOneById(id);
+		po.setStatus(status);
+		paymentOrderRepository.save(po);
+	}
 	
 }
 

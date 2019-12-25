@@ -17,11 +17,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Payment {
+public class PaymentOrder {
 	
 	@Id
 	@GeneratedValue
 	private long id;
+	
+	//ide koji payment koji dobijemo od banke
+	private long paymentId;
 	
 	private Date timestamp;
 	
@@ -30,6 +33,6 @@ public class Payment {
 	
 	private double amount;
 	
-	private PaymentStatus status = PaymentStatus.CREATED;
+	private PaymentOrderStatus status = PaymentOrderStatus.CREATED;
 
 }

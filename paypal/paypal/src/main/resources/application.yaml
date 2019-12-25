@@ -24,7 +24,7 @@ spring:
   datasource:
      username: paypaldb
      password: paypaldb
-     url: jdbc:mysql://localhost:3306/sellers_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+     url: jdbc:mysql://localhost:3306/paypal_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
   jpa:
      properties:
         hibernate:

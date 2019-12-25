@@ -7,7 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import com.sep.bank.model.PaymentInitiationRequest;
+import com.sep.bank.model.PaymentRequest;
 import com.sep.bank.security.JwtConfig;
 
 import io.jsonwebtoken.Claims;
@@ -19,9 +19,9 @@ public class TokenUtils {
 	@Autowired
 	private JwtConfig jwtConfig;
 
-	public PaymentInitiationRequest getPaymentRequest() {
+	public PaymentRequest getPaymentRequest() {
 		
-		PaymentInitiationRequest paymentRequest = new PaymentInitiationRequest();
+		PaymentRequest paymentRequest = new PaymentRequest();
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		paymentRequest.setSellerId(Long.parseLong(authentication.getPrincipal().toString()));

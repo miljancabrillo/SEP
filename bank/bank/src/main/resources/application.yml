@@ -2,9 +2,12 @@ server:
   port: 8300
   ssl:
     enabled: true
+    client-auth: need
     key-store: classpath:bankkeystore.ks
     key-store-password: bankpass
     key-alias: bank
+    trust-store: classpath:bankkeystore.ks
+    trust-store-password: bankpass
 security:
   require-ssl: true
 eureka:
@@ -31,7 +34,7 @@ spring:
            dialect: org.hibernate.dialect.MySQL5Dialect
      generate-ddl: true
      hibernate:
-        ddl-auto: update
+        ddl-auto: create
      show-sql: true
 logging:
   level:

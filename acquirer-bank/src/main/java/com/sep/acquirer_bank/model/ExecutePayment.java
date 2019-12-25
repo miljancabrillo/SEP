@@ -1,5 +1,4 @@
-package com.sep.bank.model;
-
+package com.sep.acquirer_bank.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,10 +9,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentResponse {
-	
+public class ExecutePayment {
+
 	private long paymentId;
-	private String paymentUrl;
+	private String payerPan;
+	private int securityCode;
+	private String cardHolderName;
+	private String expirationDate;
 	
-		
 }

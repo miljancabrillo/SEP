@@ -18,19 +18,19 @@
                 <form class="pt-2">
                     <div class="form-group">
                     <input type="text" class="form-control" id="pan" minlength="10" maxlength="10" aria-describedby="emailHelp" placeholder="Enter PAN(10 characters)">
-                    <small id="panError" class="form-text text-muted">Invalid PAN!</small>
+                    <small id="panError" class="form-text text-danger" >Invalid PAN!</small>
                     </div>
                     <div class="form-group">
-                    <input type="number" minlength="3" maxlength="4" class="form-control" id="securityCode" placeholder="Enter security code(3 or 4 digits)">
-                    <small id="securityCodeError" class="form-text text-muted">Invalid security code!</small>
+                    <input type="number" class="form-control" id="securityCode" placeholder="Enter security code(3 or 4 digits)">
+                    <small id="securityCodeError" class="form-text text-danger" >Invalid security code!</small>
                     </div>
                     <div class="form-group">
                     <input type="text" class="form-control" id="cardHolderName" placeholder="Enter cardholder name">
-                    <small id="cardHolderNameError" class="form-text text-muted">Card holder name must not be empty!</small>
+                    <small id="cardHolderNameError" class="form-text text-danger" >Card holder name must not be empty!</small>
                     </div>
                     <div class="form-group ">
                         <input type="text" class="form-control" id="expirationDate" placeholder="Enter card expiration date (mm/yy)">
-                        <small id="expirationDateError" class="form-text text-muted">Invalid expiration date!</small>
+                        <small id="expirationDateError" class="form-text text-danger" >Invalid expiration date!</small>
                     </div>
                     <div class="form-group">
                         <button type="submit" id="payButton" class="btn btn-primary float-right">Pay</button>            

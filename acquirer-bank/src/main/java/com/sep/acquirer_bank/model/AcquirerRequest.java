@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentRequest {
+public class AcquirerRequest {
 
 	private String merchantId;
 	private String merchantPassword;

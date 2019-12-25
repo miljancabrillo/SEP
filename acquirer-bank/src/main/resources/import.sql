@@ -1,0 +1,2 @@
+INSERT INTO user_account (id, pan, available_funds, card_holder_name, credit_card_security_number, currency, expiration_date, password, reserved_funds) VALUES (1,'AAAAA1234A',200,'Marko Markovic',123,'USD','12/20','null',0);
+INSERT INTO user_account (id, pan, available_funds, card_holder_name, credit_card_security_number, currency, expiration_date, password, reserved_funds) VALUES (2,'BBBBB1234B',1000,'Janko Jankovic',122,'USD','12/20','MARKO12345',0);

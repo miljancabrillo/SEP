@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.paypal.api.payments.Amount;
-import com.paypal.api.payments.Payee;
 import com.paypal.api.payments.Payer;
 import com.paypal.api.payments.Payment;
 import com.paypal.api.payments.PaymentExecution;
@@ -20,21 +20,33 @@ import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.OAuthTokenCredential;
 import com.paypal.base.rest.PayPalRESTException;
+import com.sep.paypal.model.PaymentOrder;
+import com.sep.paypal.model.PaymentOrderStatus;
 import com.sep.paypal.model.PaymentRequest;
+import com.sep.paypal.model.Seller;
+import com.sep.paypal.repository.PaymentOrderRepository;
+import com.sep.paypal.repository.SellerRepository;
 
 @Service
 public class PayPalService {
 	
-	private static String CLIENT_ID = "AaeQ69ERj4ff5giX9eVnXaRzsVWVjIFjmgnZUg2xYUej39kjiSs9HBg9jLyYOq1GTi-WGmgZBIYNIJwz";
-	private static String CLIENT_SECRET = "ELM6TOIJh7t-zcMFwz50mzBUuk1nmm8z4dfFZh80-b7qOSORQ5eXM_DiY19zDX-VXsxKRivZE2dgFr8s";
+	private static String KP_URL = "https://localhost:8672/paypal";
 
 	@Value("${paypal.mode}")
 	private String mode;
 	
-	public Payment createPayment( PaymentRequest pr, String cancelUrl, String successUrl) throws PayPalRESTException{
+	@Autowired
+	SellerRepository sellerRepository;
+	
+	@Autowired
+	PaymentOrderRepository paymentOrderRepository;
+	
+	public Payment createPayment( PaymentRequest pr ) throws PayPalRESTException{
+		
+		Seller seller = sellerRepository.findOneById(pr.getSellerId());
 		
 		Amount amount = new Amount();
-		amount.setCurrency("USD");
+		amount.setCurrency(pr.getCurrency());
 		double total = new BigDecimal(pr.getPrice()).setScale(2, RoundingMode.HALF_UP).doubleValue();
 		amount.setTotal(String.format("%.2f", total));
 
@@ -54,19 +66,44 @@ public class PayPalService {
 		payment.setTransactions(transactions);
 				
 		RedirectUrls redirectUrls = new RedirectUrls();
-		redirectUrls.setCancelUrl(cancelUrl);
-		redirectUrls.setReturnUrl(successUrl);
+		redirectUrls.setCancelUrl(KP_URL+"/error");
+		redirectUrls.setReturnUrl(KP_URL+"/confirmPayment.html");
 		payment.setRedirectUrls(redirectUrls);
-
-		return payment.create(getApiContext(CLIENT_ID, CLIENT_SECRET));
+		
+		PaymentOrder po = new PaymentOrder();
+		po.setSeller(seller);
+		po.setPrice(pr.getPrice());
+		po.setCurrency(pr.getCurrency());
+		paymentOrderRepository.save(po);
+				
+		payment = payment.create(getApiContext(seller.getPaypalClientId(), seller.getPaypalSecret()));
+		
+		po.setPaymentId(payment.getId());
+		paymentOrderRepository.save(po);
+		
+		return payment;
 	}
 	
 	public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException{
+		
+		PaymentOrder po = paymentOrderRepository.findOneByPaymentId(paymentId);
+		Seller seller = po.getSeller();
+		
 		Payment payment = new Payment();
 		payment.setId(paymentId);
 		PaymentExecution paymentExecute = new PaymentExecution();
 		paymentExecute.setPayerId(payerId);
-		return payment.execute(getApiContext(CLIENT_ID, CLIENT_SECRET), paymentExecute);
+		
+		payment = payment.execute(getApiContext(seller.getPaypalClientId(), seller.getPaypalSecret()), paymentExecute);
+		
+		if(payment.getState().equals("approved")) {
+			po.setStatus(PaymentOrderStatus.PAID);
+		}else {
+			po.setStatus(PaymentOrderStatus.FAILED);
+		}
+		paymentOrderRepository.save(po);
+		
+		return payment;
 	}
 
 	
@@ -76,9 +113,17 @@ public class PayPalService {
 		configMap.put("mode", mode);
 		
 		APIContext context = new APIContext(new OAuthTokenCredential(clientId, clientSecret, configMap).getAccessToken());
-		//APIContext context = new APIContext("A21AAG_H4i6oryT-qpwYF_j2bXFbbnrWdnZa7kLAvKOAc0Pl9Wm06elxR9VVhW_D4HfCcie0JdRLTvRO4puKEM3B2cGmVI1Bg");
 		context.setConfigurationMap(configMap);
 		return context;
 	}
 	
+	public void canclePaymentOrder(String paymentId) {
+		PaymentOrder po = paymentOrderRepository.findOneByPaymentId(paymentId);
+		po.setStatus(PaymentOrderStatus.FAILED);
+		paymentOrderRepository.save(po);
+	}
+
+	public Double getPaymentOrderPrice(String paymentOrderId) {
+		return paymentOrderRepository.findOneByPaymentId(paymentOrderId).getPrice();
+	}
 }

@@ -1,4 +1,4 @@
-package com.sep.bank.model;
+package com.sep.testnc.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentInitiationRequest {
-	
+public class PaymentRequestDTO {
+
 	private long sellerId;
 	private float price;
 	private String currency;

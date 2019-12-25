@@ -17,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class PaymentTransaction {
+public class Payment {
 
 	@Id
 	@GeneratedValue
@@ -32,5 +32,8 @@ public class PaymentTransaction {
 	private double amount;
 	private long merchantOrderId;
 	private Date merchantTimestamp;
-	private PaymentTransactionStatus status;
+	private PaymentStatus status;
+	private String succesUrl;
+	private String failedUrl;
+	private String errorUrl;
 }

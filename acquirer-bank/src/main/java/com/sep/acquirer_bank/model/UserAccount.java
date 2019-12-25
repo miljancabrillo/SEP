@@ -1,7 +1,7 @@
 package com.sep.acquirer_bank.model;
 
-import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,13 +21,14 @@ public class UserAccount {
 	@Id
 	@GeneratedValue
 	private long id;
-	private long password;
+	private String password;
 	private double availableFunds;
 	private double reservedFunds;
 	private String currency;
+	@Column(unique = true, length = 10)
 	private String PAN;
 	private long creditCardSecurityNumber;
 	private String cardHolderName;
-	private Date expirationDate;
+	private String expirationDate;
 		
 }

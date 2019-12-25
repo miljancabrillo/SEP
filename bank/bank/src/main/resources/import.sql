@@ -1,0 +1,1 @@
+INSERT INTO seller (id, merchant_id, merchant_password) VALUES (1, '1', 'MARKO12345');

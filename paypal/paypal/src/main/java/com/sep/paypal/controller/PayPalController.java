@@ -3,6 +3,7 @@ package com.sep.paypal.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,48 +24,47 @@ public class PayPalController {
 	
 	@Autowired
 	TokenUtils tokenUtils;
-	
-	public static final String SUCCESS_URL = "pay/success";
-	public static final String CANCEL_URL = "pay/cancel";
 
-	@GetMapping("/pay")
-	public String payment() {
+	@PostMapping("/createPayment")
+	public String createPayment() {
 		
 		PaymentRequest pr = tokenUtils.getPaymentRequest();
-		
 		try {
-			Payment payment = payPalService.createPayment(pr, "https://localhost:8672/paypal/" + CANCEL_URL,
-					"https://localhost:8672/paypal/" + SUCCESS_URL);
+			Payment payment = payPalService.createPayment(pr);
 			for(Links link:payment.getLinks()) {
 				if(link.getRel().equals("approval_url")) {
-					return "redirect:"+link.getHref();
+					return link.getHref();
 				}
-			}
-			
+			}			
 		} catch (PayPalRESTException e) {
 			e.printStackTrace();
 		}
-		return "redirect:/";
+		return "https://localhost:8672/paypal/error.html";
 	}
 	
-	 @GetMapping(value = CANCEL_URL)
-	    public String cancelPay() {
-	        return "cancel";
-	    }
+	@GetMapping("/error")
+	public String cancelPay(@RequestParam("paymentId") String paymentId) {
+		 payPalService.canclePaymentOrder(paymentId);
+		 return "https://localhost:8672/paypal/failure.html";
+	}
 
-	 @GetMapping(value = SUCCESS_URL)
+	 @GetMapping("/success")
 	 public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
 	        try {
 	            Payment payment = payPalService.executePayment(paymentId, payerId);
 	            System.out.println(payment.toJSON());
 	            if (payment.getState().equals("approved")) {
-	                return "success";
+	                return "https://localhost:8672/paypal/success.html";
 	            }
 	        } catch (PayPalRESTException e) {
 	         System.out.println(e.getMessage());
 	        }
-	        return "redirect:/";
+	        return "https://localhost:8672/paypal/failure.html";
 	    }
 
+	 @PostMapping("/paymentOrderAmount")
+	 public Double getPaymentOrderPrice(@RequestBody String paymentOrderId) {
+		 return payPalService.getPaymentOrderPrice(paymentOrderId);
+	 }
 	
 }

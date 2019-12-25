@@ -22,8 +22,8 @@ public class Seller {
 	private String name;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name= "merchant_payment_type", 
-             joinColumns = { @JoinColumn(name = "merchant_id") }, 
+    @JoinTable(name= "seller_payment_type", 
+             joinColumns = { @JoinColumn(name = "seller_id") }, 
              inverseJoinColumns = { @JoinColumn(name = "payment_type_id") })
 	private List<PaymentType> paymentTypes;
 	

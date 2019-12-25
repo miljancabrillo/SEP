@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sep.acquirer_bank.model.PaymentRequest;
-import com.sep.acquirer_bank.model.PaymentResponse;
+import com.sep.acquirer_bank.model.ExecutePayment;
+import com.sep.acquirer_bank.model.AcquirerRequest;
+import com.sep.acquirer_bank.model.AcquirerResponse;
 import com.sep.acquirer_bank.service.PaymentService;
 
 @RestController
@@ -20,8 +21,13 @@ public class PaymentController {
 	PaymentService paymentService;
 
 	@PostMapping("/createPayment")
-	public ResponseEntity<PaymentResponse> createPayment(@RequestBody PaymentRequest paymentRequest){
-		return  new ResponseEntity<PaymentResponse>(paymentService.createPayment(paymentRequest),HttpStatus.OK);
+	public ResponseEntity<AcquirerResponse> createPayment(@RequestBody AcquirerRequest paymentRequest){
+		return  new ResponseEntity<AcquirerResponse>(paymentService.createPayment(paymentRequest),HttpStatus.OK);
+	}
+	
+	@PostMapping("/executePayment")
+	public String executePayment(@RequestBody ExecutePayment executePayment) {
+		return paymentService.executePayment(executePayment);
 	}
 	
 }

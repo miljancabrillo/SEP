@@ -1,5 +1,5 @@
 package com.sep.bank.model;
 
-public enum PaymentStatus {
+public enum PaymentOrderStatus {
 	CREATED,PAID,FAILED
 }

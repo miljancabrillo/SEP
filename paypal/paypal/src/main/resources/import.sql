@@ -1,0 +1,1 @@
+INSERT INTO seller (id, paypal_client_id, paypal_secret) VALUES (1,'AaeQ69ERj4ff5giX9eVnXaRzsVWVjIFjmgnZUg2xYUej39kjiSs9HBg9jLyYOq1GTi-WGmgZBIYNIJwz', 'ELM6TOIJh7t-zcMFwz50mzBUuk1nmm8z4dfFZh80-b7qOSORQ5eXM_DiY19zDX-VXsxKRivZE2dgFr8s');
