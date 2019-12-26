@@ -1,42 +1,102 @@
 package com.sep.bitcoin.service;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.sep.bitcoin.model.GetOrder;
-import com.sep.bitcoin.model.Order;
-import com.sep.bitcoin.repository.OrderRepository;
+import com.sep.bitcoin.model.PaymentOrder;
+import com.sep.bitcoin.model.PaymentRequest;
+import com.sep.bitcoin.model.Seller;
+import com.sep.bitcoin.repository.PaymentOrderRepository;
+import com.sep.bitcoin.repository.SellerRepository;
+
 
 @Service
+@EnableScheduling
 public class BitcoinService {
+
+	private static String KP_URL = "https://localhost:8672/bitcoin";
+	private static String COINGATE_URL = "https://api-sandbox.coingate.com/v2/orders/";
+
 	
 	@Autowired
-	private OrderRepository orderRepository;
+	SellerRepository sellerRepository;
+	
+	@Autowired
+	PaymentOrderRepository paymentOrderRepository;
+	
+	public String createPayment(PaymentRequest pr) {
+	
+		PaymentOrder po = new PaymentOrder();
+		Seller payee = sellerRepository.findOneById(pr.getSellerId());
+		
+		po.setPriceAmount(pr.getPrice());
+		po.setPriceCurrency(pr.getCurrency());
+		po.setReceiveCurrency(pr.getCurrency());
+		po = paymentOrderRepository.save(po);
 
-	public void setOrderBitcoinId(String id, Integer idBitcoin) {
-		Order o = orderRepository.findById(id).orElse(null);
-		if(o!=null) {
-		o.setIdBitcoin(idBitcoin);
-		orderRepository.save(o);
+		po.setCancelUrl(KP_URL + "/cancel.html?id=" + po.getOrderId());
+		po.setSuccesUrl(KP_URL + "/success.html?id=" + po.getOrderId());
+		
+		
+		String authorizationHeader = "Bearer " + payee.getAccesToken();
+		
+		HttpHeaders requestHeaders = new HttpHeaders();
+		requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+		requestHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		requestHeaders.add("Authorization", authorizationHeader);
+		
+		HttpEntity<PaymentOrder> requestEntity = new HttpEntity<PaymentOrder>(po, requestHeaders);
+		RestTemplate rt = new RestTemplate();
+		ResponseEntity<PaymentOrder> responseEntity = rt.exchange(COINGATE_URL, HttpMethod.POST, requestEntity,
+				PaymentOrder.class);
+
+		PaymentOrder responsePo = null;
+		
+		if (responseEntity.getStatusCode() == HttpStatus.OK) {
+			
+			responsePo = responseEntity.getBody();
+			po.setCreatedAt(responsePo.getCreatedAt());
+			po.setStatus(responsePo.getStatus());
+			po.setPayee(payee);
+			po.setId(responsePo.getId());
+			paymentOrderRepository.save(po);
+			if(responsePo.getStatus().equals("new")) {
+				return responsePo.getPaymentUrl();
+			}else {
+				return KP_URL+"error.html";
+			}
 		}
+
+	     return KP_URL+"error.hrml";
+			
 	}
 
-	@Scheduled(fixedRate = 30000)
-	public void checkOrderStatus() {
-		for (Order o : orderRepository.findAll()) { 
-
-				////
-				String url = "https://api-sandbox.coingate.com/v2/orders/" + o.getIdBitcoin();
-				String authorizationHeader = "Bearer Q-smRAh_a6nF-NVXJarEt48YyHtNag1iX-__bZwx";
+	@Scheduled(fixedRate = 60000)
+	public void checkPaymentStatus() {
+		
+		List<PaymentOrder> poList = paymentOrderRepository.findAll();
+		
+		if(poList == null) return;
+		
+		for(PaymentOrder po : poList) {
+		
+			if(po.getStatus().equals("new") || po.getStatus().equals("pending") || po.getStatus().equals("confirming")) {
+				
+				Seller payee = po.getPayee();
+				
+				String authorizationHeader = "Bearer " + payee.getAccesToken();
 
 				HttpHeaders requestHeaders = new HttpHeaders();
 				requestHeaders.setContentType(MediaType.APPLICATION_JSON);
@@ -45,33 +105,23 @@ public class BitcoinService {
 				HttpEntity<String> entity = new HttpEntity<>(null, requestHeaders);
 
 				RestTemplate rt = new RestTemplate();
-				ResponseEntity<GetOrder> order = rt.exchange(url, HttpMethod.GET, entity, GetOrder.class);
-				System.out.println("STATUS ORDERA " + order.getBody().getStatus());
-				o.setExecuted(true);
-				o.setStatus(order.getBody().getStatus());
-				orderRepository.save(o);
-
-				/////
-
-			
+				ResponseEntity<PaymentOrder> response = rt.exchange(COINGATE_URL + Long.toString(po.getId()), HttpMethod.GET, entity, PaymentOrder.class);
+				
+				System.out.println("STATUS ORDERA JE SETOVAN NA " + response.getBody().getStatus());
+				
+				po.setStatus(response.getBody().getStatus());
+				
+				//ovjde bi trebalo obavjestiti nc ako je placanje uspjeno
+				
+				paymentOrderRepository.save(po);
+				
+			}		
 		}
-	}
+	} 
 	
-	public void setOrderStatus(Order o) {
-		System.out.println(o.getIdBitcoin());
-		String url = "https://api-sandbox.coingate.com/v2/orders/" + o.getIdBitcoin();
-		//String authorizationHeader = "Bearer Q-smRAh_a6nF-NVXJarEt48YyHtNag1iX-__bZwx";
-
-		HttpHeaders requestHeaders = new HttpHeaders();
-		requestHeaders.setContentType(MediaType.APPLICATION_JSON);
-		requestHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		//requestHeaders.add("Authorization", authorizationHeader);
-		HttpEntity<String> entity = new HttpEntity<>(null, requestHeaders);
-
-		RestTemplate rt = new RestTemplate();
-		ResponseEntity<GetOrder> order = rt.exchange(url, HttpMethod.GET, entity, GetOrder.class);
-		System.out.println("STATUS ORDERA JE SETOVAN NA " + order.getBody().getStatus());
-		o.setStatus(order.getBody().getStatus());
-		orderRepository.save(o);
+	public void setPaymentOrderStatus(String poId, String status) {
+		PaymentOrder po = paymentOrderRepository.findOneByOrderId(poId);
+		po.setStatus(status);
+		paymentOrderRepository.save(po);
 	}
 }

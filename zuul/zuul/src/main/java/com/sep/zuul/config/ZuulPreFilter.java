@@ -27,7 +27,7 @@ public class ZuulPreFilter extends ZuulFilter {
 	    int port = request.getLocalPort();
 	    System.out.println(port);
 	    
-	    if(port == 8672 && request.getRequestURI().contains("nc")) {
+	    if(port == 8672 && request.getRequestURI().contains("ncApi")) {
 	    	ctx.setSendZuulResponse(false);
 	        ctx.getResponse().setHeader("Content-Type", "text/plain;charset=UTF-8");
 	        ctx.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());

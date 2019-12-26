@@ -45,6 +45,12 @@ public class PayPalService {
 		
 		Seller seller = sellerRepository.findOneById(pr.getSellerId());
 		
+		PaymentOrder po = new PaymentOrder();
+		po.setSeller(seller);
+		po.setPrice(pr.getPrice());
+		po.setCurrency(pr.getCurrency());
+		paymentOrderRepository.save(po);
+		
 		Amount amount = new Amount();
 		amount.setCurrency(pr.getCurrency());
 		double total = new BigDecimal(pr.getPrice()).setScale(2, RoundingMode.HALF_UP).doubleValue();
@@ -66,15 +72,11 @@ public class PayPalService {
 		payment.setTransactions(transactions);
 				
 		RedirectUrls redirectUrls = new RedirectUrls();
-		redirectUrls.setCancelUrl(KP_URL+"/error");
+		redirectUrls.setCancelUrl(KP_URL+"/cancel.html?id=" + Long.toString(po.getId()));
 		redirectUrls.setReturnUrl(KP_URL+"/confirmPayment.html");
 		payment.setRedirectUrls(redirectUrls);
 		
-		PaymentOrder po = new PaymentOrder();
-		po.setSeller(seller);
-		po.setPrice(pr.getPrice());
-		po.setCurrency(pr.getCurrency());
-		paymentOrderRepository.save(po);
+		
 				
 		payment = payment.create(getApiContext(seller.getPaypalClientId(), seller.getPaypalSecret()));
 		
@@ -117,9 +119,9 @@ public class PayPalService {
 		return context;
 	}
 	
-	public void canclePaymentOrder(String paymentId) {
-		PaymentOrder po = paymentOrderRepository.findOneByPaymentId(paymentId);
-		po.setStatus(PaymentOrderStatus.FAILED);
+	public void canclePaymentOrder(long id) {
+		PaymentOrder po = paymentOrderRepository.findOneById(id);
+		po.setStatus(PaymentOrderStatus.CANCELED);
 		paymentOrderRepository.save(po);
 	}
 

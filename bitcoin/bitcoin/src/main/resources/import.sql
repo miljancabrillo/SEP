@@ -1,0 +1,1 @@
+INSERT INTO seller (id, acces_token) VALUES (1, '1dNZuJA8pU6TrDKa-zTEsDcyNJtsJGzSbip6UHSA');

@@ -42,10 +42,9 @@ public class PayPalController {
 		return "https://localhost:8672/paypal/error.html";
 	}
 	
-	@GetMapping("/error")
-	public String cancelPay(@RequestParam("paymentId") String paymentId) {
-		 payPalService.canclePaymentOrder(paymentId);
-		 return "https://localhost:8672/paypal/failure.html";
+	@PostMapping("/cancel")
+	public void cancelPay(@RequestBody long id) {
+		 payPalService.canclePaymentOrder(id);
 	}
 
 	 @GetMapping("/success")
@@ -59,7 +58,7 @@ public class PayPalController {
 	        } catch (PayPalRESTException e) {
 	         System.out.println(e.getMessage());
 	        }
-	        return "https://localhost:8672/paypal/failure.html";
+	        return "https://localhost:8672/paypal/error.html";
 	    }
 
 	 @PostMapping("/paymentOrderAmount")

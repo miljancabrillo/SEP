@@ -17,12 +17,12 @@ public class SellersController {
 	@Autowired
 	SellersService sellersService;
 	
-	@PostMapping("/nc/registrationUrl")
+	@PostMapping("/ncApi/registrationUrl")
 	public ResponseEntity<RegistrationRequestDTO> registration(){
 		return new ResponseEntity<>(sellersService.registration(), HttpStatus.OK);
 	}
 	
-	@PostMapping("/nc/paymentUrl")
+	@PostMapping("/ncApi/paymentUrl")
 	public String payment(@RequestBody PaymentRequestDTO pr) {
 		return sellersService.generatePaymentUrl(pr);
 	}

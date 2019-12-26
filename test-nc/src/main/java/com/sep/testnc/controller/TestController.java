@@ -23,7 +23,7 @@ public class TestController {
 	public String testPayment(@RequestBody float price) {
 		
 		PaymentRequestDTO pr = new PaymentRequestDTO(1, price, "USD");
-		ResponseEntity<String> response = restTemplate.postForEntity("https://localhost:8673/sellers/nc/paymentUrl", pr, String.class);
+		ResponseEntity<String> response = restTemplate.postForEntity("https://localhost:8673/sellers/ncApi/paymentUrl", pr, String.class);
 		
 		return response.getBody();
 	}

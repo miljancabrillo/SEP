@@ -1,4 +1,4 @@
-package com.sep.paypal.security;
+package com.sep.bitcoin.security;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,12 +38,10 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
 		    // allow all POST requests 
 		   // .antMatchers(HttpMethod.POST, "/getJWT").permitAll()
 		    //.antMatchers("/registration").permitAll()
-		    // any other requests must be authenticated*/
+		    // any other requests must be authenticated*
 		    .antMatchers("/success*").permitAll()
 		    .antMatchers("/cancel*").permitAll()
-		    .antMatchers("/error.html").permitAll()
-		    .antMatchers("/confirmPayment*").permitAll()
-		    .antMatchers("/paymentOrderAmount").permitAll()
+		    .antMatchers("/error*").permitAll()
 		    .antMatchers("/boot*").permitAll()
 		    .antMatchers("/jquery*").permitAll()
 		    .anyRequest().authenticated();
