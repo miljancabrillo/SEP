@@ -1,6 +1,8 @@
 package com.sep.bitcoin.controller;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +23,9 @@ public class BitcoinController {
 	@Autowired
 	TokenUtils tokenUtils;
 	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	
 	@PostMapping("/createPayment")
 	public String createPayment() {
 		PaymentRequest pr = tokenUtils.getPaymentRequest();
@@ -29,11 +34,13 @@ public class BitcoinController {
 	
 	@PostMapping("/cancel")
 	public void cancelPaymentOrder(@RequestBody String paymentOrderId) {
+	    logger.info("Bitcoin orderId="+ paymentOrderId +" canceled");
 		bitcoinService.setPaymentOrderStatus(paymentOrderId, "canceled");
 	}
 	
 	@PostMapping("/success")
 	public void succesPaymentOrder(@RequestBody String paymentOrderId) {
+	    logger.info("Bitcoin orderId="+ paymentOrderId +" successfull");
 		bitcoinService.setPaymentOrderStatus(paymentOrderId, "paid");
 	}
 }

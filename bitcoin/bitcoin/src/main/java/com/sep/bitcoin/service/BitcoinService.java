@@ -3,6 +3,8 @@ package com.sep.bitcoin.service;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -35,6 +37,8 @@ public class BitcoinService {
 	
 	@Autowired
 	PaymentOrderRepository paymentOrderRepository;
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public String createPayment(PaymentRequest pr) {
 	
@@ -73,8 +77,10 @@ public class BitcoinService {
 			po.setId(responsePo.getId());
 			paymentOrderRepository.save(po);
 			if(responsePo.getStatus().equals("new")) {
+			    logger.info("Bitcoin orderId="+po.getOrderId() +" sellerId="+ pr.getSellerId() +" created");
 				return responsePo.getPaymentUrl();
 			}else {
+			    logger.info("Bitcoin orderId="+po.getOrderId() +" sellerId="+ pr.getSellerId() +" cration failed");
 				return KP_URL+"error.html";
 			}
 		}
@@ -107,8 +113,7 @@ public class BitcoinService {
 				RestTemplate rt = new RestTemplate();
 				ResponseEntity<PaymentOrder> response = rt.exchange(COINGATE_URL + Long.toString(po.getId()), HttpMethod.GET, entity, PaymentOrder.class);
 				
-				System.out.println("STATUS ORDERA JE SETOVAN NA " + response.getBody().getStatus());
-				
+			    logger.info("Bitcoin orderId=" + po.getOrderId() +" status=" + response.getBody().getStatus());
 				po.setStatus(response.getBody().getStatus());
 				
 				//ovjde bi trebalo obavjestiti nc ako je placanje uspjeno

@@ -32,7 +32,6 @@ public class PaymentOrder {
 	@JsonProperty("order_id")
 	private String orderId;
 	
-    @Column(unique = true)
 	private long id;		//id koji se dobije od coingete-a
 	
 	@JsonProperty("price_amount")

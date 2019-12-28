@@ -3,9 +3,12 @@ server:
   port: 8400
   ssl:
     enabled: true
+    client-auth: need
     key-store: classpath:bitcoinkeystore.ks
     key-store-password: bitcoinpass
     key-alias: bitcoin
+    trust-store: classpath:bitcoinkeystore.ks
+    trust-store-password: bitcoinpass
 security:
   require-ssl: true
 eureka:

@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +22,18 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class SellersService {
 	
 	@Autowired
-	SellersRepository merchantsRepository;
+	SellersRepository sellersRepository;
 	
 	@Autowired
 	JwtConfig jwtConfig;
 	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	
 	public RegistrationRequestDTO registration() {
 		Seller seller  = new Seller();
-		seller = merchantsRepository.save(seller);
+		seller = sellersRepository.save(seller);
+		logger.info("Registration link sellerId=" + seller.getId());
 		RegistrationRequestDTO registrationRequest = new RegistrationRequestDTO(seller.getId(), "https://localhost:8672/sellers/registration.html?token=" + generateToken(seller.getId(), 0, ""));
 		return registrationRequest;
 		

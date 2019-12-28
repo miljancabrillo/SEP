@@ -2,9 +2,12 @@ server:
   port: 8200
   ssl:
     enabled: true
+    client-auth: need
     key-store: classpath:paypalkeystore.ks
     key-store-password: paypalpass
     key-alias: paypal
+    trust-store: classpath:paypalkeystore.ks
+    trust-store-password: paypalpass
 security:
   require-ssl: false
 eureka:

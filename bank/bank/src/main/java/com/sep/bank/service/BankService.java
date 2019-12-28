@@ -1,8 +1,9 @@
 package com.sep.bank.service;
 
-import java.security.Timestamp;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,8 @@ public class BankService {
 	
 	@Autowired
 	PaymentOrderRepository paymentOrderRepository;
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public AcquirerResponse createOrder(PaymentRequest pr) {
 		
@@ -54,6 +57,9 @@ public class BankService {
 		ar.setErrorUrl(KP_URL + "/error");
 		
 		ResponseEntity<AcquirerResponse> response = restTemplate.postForEntity(BANK_URL + "/createPayment", ar, AcquirerResponse.class);
+		
+	    logger.info("Bank orderId="+ paymentOrder.getId() +" created sellerId=" + pr.getSellerId());
+
 		
 		paymentOrder.setPaymentId(response.getBody().getPaymentId());
 		paymentOrderRepository.save(paymentOrder);

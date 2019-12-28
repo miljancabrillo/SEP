@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -40,6 +42,8 @@ public class PayPalService {
 	
 	@Autowired
 	PaymentOrderRepository paymentOrderRepository;
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public Payment createPayment( PaymentRequest pr ) throws PayPalRESTException{
 		
@@ -75,10 +79,9 @@ public class PayPalService {
 		redirectUrls.setCancelUrl(KP_URL+"/cancel.html?id=" + Long.toString(po.getId()));
 		redirectUrls.setReturnUrl(KP_URL+"/confirmPayment.html");
 		payment.setRedirectUrls(redirectUrls);
-		
-		
 				
 		payment = payment.create(getApiContext(seller.getPaypalClientId(), seller.getPaypalSecret()));
+	    logger.info("Paypal order paypalId="+ payment.getId() +" created sellerId="+pr.getSellerId());
 		
 		po.setPaymentId(payment.getId());
 		paymentOrderRepository.save(po);
@@ -99,8 +102,10 @@ public class PayPalService {
 		payment = payment.execute(getApiContext(seller.getPaypalClientId(), seller.getPaypalSecret()), paymentExecute);
 		
 		if(payment.getState().equals("approved")) {
+   		    logger.info("Paypal order paypalId="+ paymentId +" approved");
 			po.setStatus(PaymentOrderStatus.PAID);
 		}else {
+   		    logger.info("Paypal order paypalId="+ paymentId +" failed");
 			po.setStatus(PaymentOrderStatus.FAILED);
 		}
 		paymentOrderRepository.save(po);
@@ -122,6 +127,7 @@ public class PayPalService {
 	public void canclePaymentOrder(long id) {
 		PaymentOrder po = paymentOrderRepository.findOneById(id);
 		po.setStatus(PaymentOrderStatus.CANCELED);
+		logger.info("Paypal orderId="+ id +" canceled");
 		paymentOrderRepository.save(po);
 	}
 

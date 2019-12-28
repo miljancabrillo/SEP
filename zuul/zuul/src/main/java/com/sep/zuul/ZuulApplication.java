@@ -46,6 +46,7 @@ public class ZuulApplication {
 		args.setEurekaJerseyClient(builder.build());
 		return args;
 	}
+	
 	@Bean
 	public CorsFilter corsFilter() {
 	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

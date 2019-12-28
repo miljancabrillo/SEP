@@ -1,5 +1,7 @@
 package com.sep.bank.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,8 @@ public class BankController {
 	@Autowired
 	BankService bankService;
 	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@PostMapping("/createPayment")
 	public ResponseEntity<String> createOrder() {
 		
@@ -37,17 +41,20 @@ public class BankController {
 	
 	@GetMapping("/success")
 	public String success(@RequestParam long merchantOrderId) {
+	    logger.info("Bank orderId="+ merchantOrderId +" successful");
 		bankService.setPaymentOrderStatus(merchantOrderId, PaymentOrderStatus.PAID);
 		return "https://localhost:8672/bank/success.html";
 	}
 	@GetMapping("/failure")
 	public String failure(@RequestParam long merchantOrderId) {
+	    logger.info("Bank orderId="+ merchantOrderId +" failed");
 		bankService.setPaymentOrderStatus(merchantOrderId, PaymentOrderStatus.FAILED);
 		return "https://localhost:8672/bank/failure.html";
 	}
 	
 	@GetMapping("/error")
 	public String error(@RequestParam long merchantOrderId) {
+	    logger.info("Bank orderId="+ merchantOrderId +" failed");
 		bankService.setPaymentOrderStatus(merchantOrderId, PaymentOrderStatus.FAILED);
 		return "https://localhost:8672/bank/error.html";
 	}
