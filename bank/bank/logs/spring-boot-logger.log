@@ -1,12 +1,8 @@
-2019-12-27 20:30:32,538 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-27 20:31:39,479 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 73.039 seconds (JVM running for 75.09)
-2019-12-27 20:33:56,247 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-3] Bank orderId=1 created sellerId=1
-2019-12-27 20:34:19,444 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-4] Bank orderId=1 successful
-2019-12-27 20:34:57,873 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-10] Bank orderId=2 created sellerId=1
-2019-12-27 20:35:33,678 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-5] Bank orderId=2 failed
-2019-12-27 21:15:39,387 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-27 21:16:40,814 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 66.891 seconds (JVM running for 69.179)
-2019-12-27 21:18:41,983 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-8] Bank orderId=1 created sellerId=1
-2019-12-27 21:18:54,616 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-9] Bank orderId=1 successful
-2019-12-27 21:19:04,198 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-10] Bank orderId=2 created sellerId=1
-2019-12-27 21:19:18,472 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-8] Bank orderId=2 failed
+2020-01-21 00:47:05,925 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-21 00:47:21,872 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 18.961 seconds (JVM running for 20.036)
+2020-01-21 00:51:06,130 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-21 00:51:10,675 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 5.263 seconds (JVM running for 248.834)
+2020-01-21 00:51:20,080 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-21 00:51:24,110 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 4.967 seconds (JVM running for 262.268)
+2020-01-21 00:51:43,039 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-21 00:52:04,674 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 25.61 seconds (JVM running for 26.7)

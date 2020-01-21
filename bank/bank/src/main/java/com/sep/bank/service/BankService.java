@@ -9,11 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.sep.bank.DTO.RegistrationDTO;
 import com.sep.bank.model.AcquirerRequest;
 import com.sep.bank.model.AcquirerResponse;
 import com.sep.bank.model.Seller;
 import com.sep.bank.repository.PaymentOrderRepository;
 import com.sep.bank.repository.SellersRepository;
+import com.sep.bank.utils.TokenUtils;
 import com.sep.bank.model.PaymentOrder;
 import com.sep.bank.model.PaymentOrderStatus;
 import com.sep.bank.model.PaymentRequest;
@@ -32,6 +34,9 @@ public class BankService {
 	
 	@Autowired
 	PaymentOrderRepository paymentOrderRepository;
+	
+	@Autowired
+	TokenUtils tokenUtils;
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -73,5 +78,14 @@ public class BankService {
 		paymentOrderRepository.save(po);
 	}
 	
+
+	 public void register(RegistrationDTO rDTO) {
+			Seller seller = new Seller();
+			seller.setId(tokenUtils.getSellerId());
+			seller.setEmail(rDTO.getEmail());
+			seller.setMerchantId(rDTO.getClientId());
+			seller.setMerchantPassword(rDTO.getClientPassword());
+			sellerRepository.save(seller);
+	}
 }
 

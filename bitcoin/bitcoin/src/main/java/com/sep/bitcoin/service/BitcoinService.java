@@ -17,11 +17,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.sep.bitcoin.DTO.RegistrationDTO;
 import com.sep.bitcoin.model.PaymentOrder;
 import com.sep.bitcoin.model.PaymentRequest;
 import com.sep.bitcoin.model.Seller;
 import com.sep.bitcoin.repository.PaymentOrderRepository;
 import com.sep.bitcoin.repository.SellerRepository;
+import com.sep.bitcoin.utils.TokenUtils;
 
 
 @Service
@@ -37,6 +39,9 @@ public class BitcoinService {
 	
 	@Autowired
 	PaymentOrderRepository paymentOrderRepository;
+	
+	@Autowired
+	TokenUtils tokenUtils;
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -129,4 +134,13 @@ public class BitcoinService {
 		po.setStatus(status);
 		paymentOrderRepository.save(po);
 	}
+	
+	 public void register(RegistrationDTO rDTO) {
+			Seller seller = new Seller();
+			seller.setId(tokenUtils.getSellerId());
+			seller.setEmail(rDTO.getEmail());
+			seller.setAccesToken(rDTO.getAccessToken());
+			sellerRepository.save(seller);
+		 }
+	
 }

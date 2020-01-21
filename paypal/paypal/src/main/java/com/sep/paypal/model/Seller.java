@@ -1,7 +1,6 @@
 package com.sep.paypal.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -17,9 +16,9 @@ import lombok.Setter;
 public class Seller {
 
 	@Id
-	@GeneratedValue
 	private long id;
 	private String paypalClientId;
 	private String paypalSecret;
+	private String email;
 	
 }

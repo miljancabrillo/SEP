@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <script src="jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="bootstrap.min.js"></script>
+    <script src="https://localhost:8672/bitcoin/registrationForm.js"></script>
+</head>
+
+<body>
+   <h5>Bitcoin registration:</h5>
+   <form id="registrationForm">
+    <div class="form-group row">
+        <div class="col-2">
+            <label>Email</label>
+        </div>
+        <div class="col-10">
+            <input type="text" id="email" displayName="email" class="form-control  required-field">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-2">
+            <label>Coingate acces token:</label>
+        </div>
+        <div class="col-10">
+            <input type="text" id="accessToken" displayName="access token" class="form-control  required-field">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-9">
+            <p class="text-danger" id="registrationMessage"></p>
+        </div>
+        <div class="col-3">
+            <button type="button" class="btn btn-secondary" id="register">Register</button>
+        </div>
+    </div>
+   </form>
+   <div id="registrationSuccess">
+       <p class="text-success">You have been registered successfully to Bitcoin service!</p>
+   </div>
+</body>
+
+</html>

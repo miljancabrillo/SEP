@@ -35,6 +35,15 @@ public class TokenUtils {
 		return paymentRequest;
 	}
 	
+	public long getSellerId() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		String token = authentication.getDetails().toString();
+		Map<String,Object> claims = getTokenClaims(token);
+		
+		return Long.parseLong(claims.get("sellerId").toString());
+	}
+	
 	private Map<String,Object> getTokenClaims(String token){
 		
 		Claims claims = Jwts.parser()

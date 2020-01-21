@@ -22,12 +22,14 @@ import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.OAuthTokenCredential;
 import com.paypal.base.rest.PayPalRESTException;
+import com.sep.paypal.DTO.RegistrationDTO;
 import com.sep.paypal.model.PaymentOrder;
 import com.sep.paypal.model.PaymentOrderStatus;
 import com.sep.paypal.model.PaymentRequest;
 import com.sep.paypal.model.Seller;
 import com.sep.paypal.repository.PaymentOrderRepository;
 import com.sep.paypal.repository.SellerRepository;
+import com.sep.paypal.utils.TokenUtils;
 
 @Service
 public class PayPalService {
@@ -39,6 +41,9 @@ public class PayPalService {
 	
 	@Autowired
 	SellerRepository sellerRepository;
+	
+	@Autowired
+	TokenUtils tokenUtils;
 	
 	@Autowired
 	PaymentOrderRepository paymentOrderRepository;
@@ -134,4 +139,14 @@ public class PayPalService {
 	public Double getPaymentOrderPrice(String paymentOrderId) {
 		return paymentOrderRepository.findOneByPaymentId(paymentOrderId).getPrice();
 	}
+	
+	 public void register(RegistrationDTO rDTO) {
+			Seller seller = new Seller();
+			seller.setId(tokenUtils.getSellerId());
+			seller.setEmail(rDTO.getEmail());
+			seller.setPaypalClientId(rDTO.getClientId());
+			seller.setPaypalSecret(rDTO.getClientSecret());
+			sellerRepository.save(seller);
+	 }
+		
 }

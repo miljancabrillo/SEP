@@ -17,9 +17,9 @@ import lombok.Setter;
 public class Seller {
 
 	@Id
-	@GeneratedValue
 	private long id;
 	private String merchantId;
 	private String merchantPassword;
+	private String email;
 	
 }

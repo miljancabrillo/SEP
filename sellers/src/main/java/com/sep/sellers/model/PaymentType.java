@@ -4,7 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PaymentType {
 	
 	@Id
@@ -12,26 +21,4 @@ public class PaymentType {
 	
 	@NotBlank	
 	private String name;
-	
-	public PaymentType(long id, @NotBlank String name) {
-		super();
-		this.id = id;
-		this.name = name;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 }

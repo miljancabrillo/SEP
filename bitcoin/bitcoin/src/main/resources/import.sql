@@ -1,1 +1,1 @@
-INSERT INTO seller (id, acces_token) VALUES (1, '1dNZuJA8pU6TrDKa-zTEsDcyNJtsJGzSbip6UHSA');
+INSERT INTO seller (id, acces_token, email) VALUES (1, '1dNZuJA8pU6TrDKa-zTEsDcyNJtsJGzSbip6UHSA', 'marko@gmail.com');

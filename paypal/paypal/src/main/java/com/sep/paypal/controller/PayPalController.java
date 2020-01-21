@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
+import com.sep.paypal.DTO.RegistrationDTO;
 import com.sep.paypal.model.PaymentRequest;
+import com.sep.paypal.model.Seller;
+import com.sep.paypal.repository.SellerRepository;
 import com.sep.paypal.service.PayPalService;
 import com.sep.paypal.utils.TokenUtils;
 
@@ -26,6 +29,9 @@ public class PayPalController {
 	
 	@Autowired
 	TokenUtils tokenUtils;
+	
+	@Autowired
+	SellerRepository sellerRepository;
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 

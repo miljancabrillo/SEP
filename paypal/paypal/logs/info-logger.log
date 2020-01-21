@@ -1,16 +1,3 @@
-2019-12-27 20:30:32,959 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-27 20:31:44,869 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started PaypalApplication in 83.937 seconds (JVM running for 86.052)
-2019-12-27 20:42:53,273 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-10] Paypal order paypalId=PAYID-LYDF5QI8FM90260KJ0984236 created sellerId=1
-2019-12-27 20:48:32,722 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-6] Paypal order paypalId=PAYID-LYDF5QI8FM90260KJ0984236 approved
-2019-12-27 20:49:14,315 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-9] Paypal order paypalId=PAYID-LYDGAPQ65M4750367953612A created sellerId=1
-2019-12-27 20:50:33,991 INFO com.sep.paypal.controller.PayPalController [https-jsse-nio-8200-exec-10] Paypal orderId=2 canceled
-2019-12-27 20:50:33,999 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-10] Paypal orderId=2 canceled
-2019-12-27 21:11:37,154 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-6] Paypal order paypalId=PAYID-LYDGK7I28N27667TN707872M created sellerId=1
-2019-12-27 21:11:37,324 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-1] Paypal order paypalId=PAYID-LYDGK7I5WB77608YC5297341 created sellerId=1
-2019-12-27 21:16:00,449 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-27 21:16:43,831 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started PaypalApplication in 55.963 seconds (JVM running for 60.509)
-2019-12-27 21:20:20,773 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-6] Paypal order paypalId=PAYID-LYDGPCA3BG7014065962421H created sellerId=1
-2019-12-27 21:21:27,476 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-4] Paypal order paypalId=PAYID-LYDGPCA3BG7014065962421H approved
-2019-12-27 21:21:38,713 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-2] Paypal order paypalId=PAYID-LYDGPVQ9KF74297JF3125540 created sellerId=1
-2019-12-27 21:23:41,107 INFO com.sep.paypal.controller.PayPalController [https-jsse-nio-8200-exec-2] Paypal orderId=2 canceled
-2019-12-27 21:23:41,120 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-2] Paypal orderId=2 canceled
+2020-01-21 00:28:24,862 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-21 00:28:41,960 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started PaypalApplication in 20.321 seconds (JVM running for 21.321)
+2020-01-21 00:35:31,242 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default

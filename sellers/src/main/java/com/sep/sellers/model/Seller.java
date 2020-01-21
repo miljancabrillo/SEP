@@ -9,14 +9,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.JoinColumn;
 
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Seller {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	private String name;
@@ -27,37 +37,7 @@ public class Seller {
              inverseJoinColumns = { @JoinColumn(name = "payment_type_id") })
 	private List<PaymentType> paymentTypes;
 	
-	public Seller(long id, String name, List<PaymentType> paymentTypes) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.paymentTypes = paymentTypes;
-	}
-	
-	public Seller() {
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<PaymentType> getPaymentTypes() {
-		return paymentTypes;
-	}
-
-	public void setPaymentTypes(List<PaymentType> paymentTypes) {
-		this.paymentTypes = paymentTypes;
+	public void addPaymentType(PaymentType paymentType) {
+		paymentTypes.add(paymentType);
 	}
 }

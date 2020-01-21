@@ -1,2 +1,0 @@
-2019-12-02 20:46:39,788 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-02 20:46:48,739 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 11.622 seconds (JVM running for 12.725)

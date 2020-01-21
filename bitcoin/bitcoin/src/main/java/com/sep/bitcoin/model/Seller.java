@@ -1,7 +1,6 @@
 package com.sep.bitcoin.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -17,8 +16,8 @@ import lombok.Setter;
 public class Seller {
 
 	@Id
-	@GeneratedValue
 	private long id;
+	private String email;
 	private String accesToken;
 	
 }

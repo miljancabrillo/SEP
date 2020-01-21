@@ -45,6 +45,10 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
 		    .antMatchers("/success.html").permitAll()
 		    .antMatchers("/error.html").permitAll()
 		    .antMatchers("/error.html").permitAll()
+		    .antMatchers("/boot*").permitAll()
+		    .antMatchers("/jquery*").permitAll()
+		    .antMatchers("/getRegistrationForm").permitAll()
+		    .antMatchers("/registration*").permitAll()
 		    .anyRequest().authenticated();
 		    //.anyRequest().permitAll();
 
