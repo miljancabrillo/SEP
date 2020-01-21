@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import com.sep.testnc.dto.PaymentRequestDTO;
 import com.sep.testnc.dto.RegistrationRequestDTO;
 import com.sep.testnc.dto.RegistrationResponseDTO;
+import com.sep.testnc.dto.SubscriptionDTO;
 
 @RestController
 @RequestMapping("/")
@@ -39,5 +40,15 @@ public class TestController {
 				registrationDTO, RegistrationResponseDTO.class);
 
 		return response.getBody();
+	}
+	
+	@GetMapping("/testSubscription")
+	public String testSubscription() {
+		
+		SubscriptionDTO subsDTO = new SubscriptionDTO(1, "sub", "desc", "FIXED", "MONTH", "2", "2", "20", "USD", "AA");
+		ResponseEntity<String> response = restTemplate.postForEntity("https://localhost:8673/paypal/ncApi/createSubscription",
+				subsDTO, String.class);
+
+		return response.getBody().toString();
 	}
 }

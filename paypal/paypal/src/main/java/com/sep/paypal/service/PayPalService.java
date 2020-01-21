@@ -23,6 +23,7 @@ import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.OAuthTokenCredential;
 import com.paypal.base.rest.PayPalRESTException;
 import com.sep.paypal.DTO.RegistrationDTO;
+import com.sep.paypal.DTO.SubscriptionDTO;
 import com.sep.paypal.model.PaymentOrder;
 import com.sep.paypal.model.PaymentOrderStatus;
 import com.sep.paypal.model.PaymentRequest;
@@ -118,6 +119,9 @@ public class PayPalService {
 		return payment;
 	}
 
+	public void createSubscription(SubscriptionDTO subsDTO) throws PayPalRESTException{
+		
+	}
 	
 	private APIContext getApiContext(String clientId, String clientSecret) throws PayPalRESTException {
 		

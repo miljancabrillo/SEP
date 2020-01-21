@@ -38,10 +38,11 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
 		    .antMatchers("/success*").permitAll()
 		    .antMatchers("/cancel*").permitAll()
 		    .antMatchers("/error.html").permitAll()
-		    .antMatchers("/confirmPayment*").permitAll()
+		    .antMatchers("/confir*").permitAll()
 		    .antMatchers("/paymentOrderAmount").permitAll()
 		    .antMatchers("/getRegistrationForm").permitAll()
 		    .antMatchers("/registration*").permitAll()
+		    .antMatchers("/ncApi/createSubscription").permitAll()
 		    .antMatchers("/boot*").permitAll()
 		    .antMatchers("/jquery*").permitAll()
 		    .anyRequest().authenticated();
