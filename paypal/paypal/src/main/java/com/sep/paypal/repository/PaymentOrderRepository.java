@@ -6,7 +6,7 @@ import com.sep.paypal.model.PaymentOrder;
 
 public interface PaymentOrderRepository extends JpaRepository<PaymentOrder, Long> {
 	
-	PaymentOrder findOneById(long id);
+	PaymentOrder findOneById(String id);
 	
 	@SuppressWarnings("unchecked")
 	PaymentOrder save(PaymentOrder po);

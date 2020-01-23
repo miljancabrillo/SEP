@@ -12,11 +12,14 @@ import java.util.TimeZone;
 
 import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.paypal.api.payments.Agreement;
+import com.paypal.api.payments.AgreementStateDescriptor;
 import com.paypal.api.payments.ChargeModels;
 import com.paypal.api.payments.Currency;
+import com.paypal.api.payments.Links;
 import com.paypal.api.payments.MerchantPreferences;
 import com.paypal.api.payments.Patch;
 import com.paypal.api.payments.Payer;
@@ -26,10 +29,17 @@ import com.paypal.api.payments.RedirectUrls;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.OAuthTokenCredential;
 import com.paypal.base.rest.PayPalRESTException;
-import com.sep.paypal.DTO.SubscriptionDTO;
+import com.sep.paypal.DTO.SubscriptionRequestDTO;
+import com.sep.paypal.DTO.SubscriptionResponseDTO;
 import com.sep.paypal.model.Seller;
+import com.sep.paypal.model.Subscription;
 import com.sep.paypal.repository.SellerRepository;
+import com.sep.paypal.repository.SubscriptionRepository;
+import com.sep.paypal.security.JwtConfig;
 import com.sep.paypal.utils.TokenUtils;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
 public class SubscriptionService {
@@ -39,12 +49,27 @@ public class SubscriptionService {
 	
 	@Autowired
 	TokenUtils tokenUtils;
+	
+	@Autowired
+	SubscriptionRepository subsRepository;
+	
+	@Autowired 
+	JwtConfig jwtConfig;
 
 	private static String KP_URL = "https://localhost:8672/paypal";
 	
-	public Agreement createSubscription(SubscriptionDTO subsDTO) throws PayPalRESTException, MalformedURLException, UnsupportedEncodingException{
+	public SubscriptionResponseDTO createSubscription(SubscriptionRequestDTO subsDTO){
+		
+		SubscriptionResponseDTO responseDTO = new SubscriptionResponseDTO();
 		
 		Seller seller = sellerRepository.getOne(subsDTO.getSellerId());
+		Subscription subscription = new Subscription();
+		subscription.setSellerId(seller.getId());
+		subscription.setConfirmationUrl(subsDTO.getConfirmationURL());
+		subscription.setName(subsDTO.getName());
+		subscription.setDescription(subsDTO.getDescription());
+		subscription = subsRepository.save(subscription);
+		responseDTO.setSubscriptionId(subscription.getId());
 		
 		Plan plan = null;
 		
@@ -76,20 +101,40 @@ public class SubscriptionService {
 		agreement.setPlan(newPlan);
 		
 		RedirectUrls redirectUrls = new RedirectUrls();
-		redirectUrls.setCancelUrl(KP_URL+"/cancelSubscription.html?id=");
+		redirectUrls.setCancelUrl(KP_URL+"/cancelSubscription.html?id="+subscription.getId());
 		redirectUrls.setReturnUrl(KP_URL+"/confirmSubscription.html");
 		
 		MerchantPreferences merchantPreferences = new MerchantPreferences();
 		merchantPreferences.setCancelUrl(KP_URL+"/cancelSubscription.html?id=");
-		merchantPreferences.setReturnUrl(KP_URL+"/confirmSubscription.html");
+		merchantPreferences.setReturnUrl(KP_URL+"/confirmSubscription.html?sellerId="+seller.getId());
 		agreement.setOverrideMerchantPreferences(merchantPreferences);
 		
-		agreement = agreement.create(getApiContext(seller.getPaypalClientId(), seller.getPaypalSecret()));
 		
-		return agreement;
+		try {
+			agreement = agreement.create(getApiContext(seller.getPaypalClientId(), seller.getPaypalSecret()));
+		} catch (MalformedURLException | UnsupportedEncodingException | PayPalRESTException e) {
+			// TODO Auto-generated catch block
+			responseDTO.setPaymentUrl("error");
+			e.printStackTrace();
+		}
+		
+		
+		subscription.setPlanId(plan.getId());
+		subscription.setAggrementToken(agreement.getToken());
+		subscription.setStatus("created");
+		subsRepository.save(subscription);
+		
+		 for (Links links : agreement.getLinks()) {
+			    if ("approval_url".equals(links.getRel())) {
+			    	responseDTO.setPaymentUrl(links.getHref());
+			  }
+		 }
+		
+		responseDTO.setCancelUrl(KP_URL+"/cancelSubscription/"+agreement.getToken());
+		return responseDTO;
 	}
 	
-	public Plan createBillingPlan(SubscriptionDTO subsDTO, Seller seller) throws PayPalRESTException {
+	private Plan createBillingPlan(SubscriptionRequestDTO subsDTO, Seller seller) throws PayPalRESTException {
 		// Build Plan object
 		Plan plan = new Plan();
 		plan.setName(subsDTO.getName());
@@ -152,6 +197,45 @@ public class SubscriptionService {
 		return plan;
 	}
 	
+	public String cancelSubscription(String token) {
+		Subscription sub = subsRepository.findOneByAggrementToken(token);			
+		Seller seller = sellerRepository.findOneById(sub.getSellerId());
+		
+		if(sub.getAggrementId() != null) {
+			Agreement agr = new Agreement();
+			agr.setId(sub.getAggrementId());
+			try {
+				agr.cancel(getApiContext(seller.getPaypalClientId(), seller.getPaypalSecret()), new AgreementStateDescriptor().setNote("note"));
+			} catch (PayPalRESTException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "error";
+			}
+		}
+	
+		sub.setStatus("cancled");
+		subsRepository.save(sub);
+		return "success";
+	}
+	
+	public String executeSubscription(String token, long sellerId) {
+		Seller seller = sellerRepository.findOneById(sellerId);
+		Agreement agreement = new Agreement();
+		agreement.setToken(token);
+		
+		try {
+			agreement = Agreement.execute(getApiContext(seller.getPaypalClientId(), seller.getPaypalSecret()), token);
+		} catch (PayPalRESTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "error";
+		}
+		Subscription sub = subsRepository.findOneByAggrementToken(token);
+		sub.setStatus("active");
+		sub.setAggrementId(agreement.getId());
+		subsRepository.save(sub);
+		return "success";
+	}
 	private APIContext getApiContext(String clientId, String clientSecret) throws PayPalRESTException {
 		
 		Map<String, String> configMap = new HashMap<>();
@@ -161,6 +245,15 @@ public class SubscriptionService {
 		context.setConfigurationMap(configMap);
 		return context;
 	}
-	
-	
+
+	@Scheduled(fixedRate = 60000)
+	private void checkSubscriptionStatus() {
+		/*List<Subscription> subs = subsRepository.getSubscriptionsByStatus("created");
+		for (Subscription subscription : subs) {
+			Agreement agreement = new Agreement();
+			agreement.setToken(subscription.getAggrementToken());
+			agreement.
+		}*/
+	}
+
 }

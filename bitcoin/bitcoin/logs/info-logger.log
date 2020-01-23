@@ -1,4 +1,15 @@
-2020-01-21 00:01:50,805 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2020-01-21 00:02:09,353 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 21.894 seconds (JVM running for 23.085)
-2020-01-21 00:06:08,993 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2020-01-21 00:06:27,169 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 21.594 seconds (JVM running for 22.72)
+2020-01-22 17:32:32,466 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-22 17:32:50,466 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 21.908 seconds (JVM running for 23.229)
+2020-01-22 17:34:44,289 INFO com.sep.bitcoin.service.BitcoinService [https-jsse-nio-8400-exec-1] Bitcoin orderId=8264f7ea-b0e2-4f7c-b5ed-0a09abd48631 sellerId=1 created
+2020-01-22 17:34:49,647 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8264f7ea-b0e2-4f7c-b5ed-0a09abd48631 status=new
+2020-01-22 17:35:49,737 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8264f7ea-b0e2-4f7c-b5ed-0a09abd48631 status=paid
+2020-01-22 17:39:23,978 INFO com.sep.bitcoin.service.BitcoinService [https-jsse-nio-8400-exec-7] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 sellerId=1 created
+2020-01-22 17:39:50,900 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
+2020-01-22 17:40:51,161 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
+2020-01-22 17:41:52,543 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
+2020-01-22 17:42:49,796 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
+2020-01-22 17:43:49,675 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
+2020-01-22 17:44:49,718 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
+2020-01-22 17:45:49,859 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
+2020-01-22 17:46:50,002 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
+2020-01-22 17:47:49,697 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending

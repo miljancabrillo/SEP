@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	$.ajax({
         type: "POST",
-        url: "https://localhost:8672/paypal/cancel/"+getUrlParameter("id"),
+        url: "https://localhost:8672/paypal/cancelSubscription/"+getUrlParameter("token"),
         contentType: "application/json",
         success: function(data){
         }         

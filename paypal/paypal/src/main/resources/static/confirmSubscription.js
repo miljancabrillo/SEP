@@ -7,20 +7,26 @@ $(document).ready(function(){
 
     $.ajax({
         type: "POST",
-        url: "https://localhost:8672/paypal/paymentOrderAmount",
-        data: paymentId,
+        url: "https://localhost:8672/paypal/subscriptionDetails/"+getUrlParameter("token"),
         contentType: "application/json",
         success: function(data){
-            $("#price").val(data);
+            $("#name").val(data.name);
+            $("#description").val(data.description);
+
         }
       });
+
+      $("#cancelButton").click(function(event){
+          event.preventDefault();     
+          window.location.replace("https://localhost:8672/paypal/cancelSubscription.html?token="+getUrlParameter("token"));
+      })
 
       $("#confirmButton").click(function(event){
           event.preventDefault();
           confirmPressed = true;
           $.ajax({
-            type: "GET",
-            url: "https://localhost:8672/paypal/success?paymentId="+paymentId+"&PayerID="+payerId,
+            type: "POST",                   
+            url: "https://localhost:8672/paypal/executeSubscription/"+getUrlParameter("token")+"/"+getUrlParameter("sellerId"),
             contentType: "application/json",
             success: function(data){
                window.location.replace(data);
@@ -29,13 +35,6 @@ $(document).ready(function(){
 
       })
       
-      $("#cancelButton").click(function(event){
-          event.preventDefault();
-          window.location.replace("https://localhost:8672/paypal/cancel.html?id="+getUrlParameter("id"));
-
-      })
-
-
     function getUrlParameter(sParam) {
         var sPageURL = window.location.search.substring(1),
             sURLVariables = sPageURL.split('&'),
@@ -50,6 +49,7 @@ $(document).ready(function(){
             }
         }
     };
+
 })
 
 $(window).on("unload", function(e) {
@@ -57,8 +57,8 @@ $(window).on("unload", function(e) {
 	if(!confirmPressed){
 		$.ajax({
 	        type: "POST",
-	        asyn: false,
-	        url: "https://localhost:8672/paypal/cancel/"+getUrlParameter("id"),
+	        url: "https://localhost:8672/paypal/cancelSubscription/"+getUrlParameter("token"),
+	        async: false,
 	        contentType: "application/json",
 	        success: function(data){
 	        }         

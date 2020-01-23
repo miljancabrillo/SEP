@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	$.ajax({
         type: "POST",
-        url: "https://localhost:8672/bitcoin/cancel",
+        url: "https://localhost:8672/bitcoin/cancel/"+getUrlParameter("id"),
         data: getUrlParameter("id"),
         contentType: "application/json",
         success: function(data){

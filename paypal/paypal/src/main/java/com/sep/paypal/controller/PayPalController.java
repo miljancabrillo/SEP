@@ -6,21 +6,27 @@ import java.net.MalformedURLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.inject.spi.Message;
 import com.paypal.api.payments.Agreement;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
-import com.sep.paypal.DTO.SubscriptionDTO;
+import com.sep.paypal.DTO.SubscriptionRequestDTO;
+import com.sep.paypal.DTO.SubscriptionResponseDTO;
 import com.sep.paypal.model.PaymentRequest;
-import com.sep.paypal.model.Seller;
+import com.sep.paypal.model.Subscription;
 import com.sep.paypal.repository.SellerRepository;
+import com.sep.paypal.repository.SubscriptionRepository;
 import com.sep.paypal.service.PayPalService;
 import com.sep.paypal.service.SubscriptionService;
 import com.sep.paypal.utils.TokenUtils;
@@ -40,6 +46,10 @@ public class PayPalController {
 	
 	@Autowired
 	SubscriptionService subscriptionService;
+	
+	@Autowired
+	SubscriptionRepository subsRepository;
+	
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -61,33 +71,32 @@ public class PayPalController {
 	}
 	
 	@PostMapping("/ncApi/createSubscription")
-	public String createSuscription(@RequestBody SubscriptionDTO subsDTO) {
-		try {
-			  Agreement agreement = subscriptionService.createSubscription(subsDTO);
-
-			  for (Links links : agreement.getLinks()) {
-			    if ("approval_url".equals(links.getRel())) {
-			    	return links.getHref();
-			    }
-			  }
-			} catch (PayPalRESTException e) {
-			  System.err.println(e.getDetails());
-			} catch (MalformedURLException e) {
-			  e.printStackTrace();
-			} catch (UnsupportedEncodingException e) {
-			  e.printStackTrace();
-		}
-		return "error";
+	public SubscriptionResponseDTO createSuscription(@RequestBody SubscriptionRequestDTO subsDTO) {
+		return subscriptionService.createSubscription(subsDTO);
+	}
+		
+	@PostMapping("/cancelSubscription/{token}")
+	public ResponseEntity<String> cancelSubscription(@PathVariable("token") String token) {
+		String message = subscriptionService.cancelSubscription(token);
+		if(message == "error") return new ResponseEntity<>("Subscription cancelation failed!", HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>("Subscription canceled successfuly!", HttpStatus.OK);
 	}
 	
-	@PostMapping("/cancel")
-	public void cancelPay(@RequestBody long id) {
+	@PostMapping("/executeSubscription/{token}/{sellerId}")
+	public String executeSubscription(@PathVariable("token") String token, @PathVariable("sellerId") long sellerId) {
+		String status = subscriptionService.executeSubscription(token, sellerId);
+		if(status.equals("error")) return "https://localhost:8672/paypal/errorSubscription.html";
+		return "https://localhost:8672/paypal/successSubscription.html";
+	}
+	
+	@PostMapping("/cancel/{id}")
+	public void cancelPayment(@PathVariable("id") String id) {
 		 logger.info("Paypal orderId="+ id +" canceled");
 		 payPalService.canclePaymentOrder(id);
 	}
 
 	 @GetMapping("/success")
-	 public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
+	 public String successfullPayment(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
 	        try {
 	            Payment payment = payPalService.executePayment(paymentId, payerId);
 	            System.out.println(payment.toJSON());
@@ -105,4 +114,15 @@ public class PayPalController {
 		 return payPalService.getPaymentOrderPrice(paymentOrderId);
 	 }
 	
+	 @PostMapping("/subscriptionDetails/{token}")
+	 public SubscriptionRequestDTO getSubscriptionDetails(@PathVariable("token") String token) {
+		 Subscription sub = subsRepository.findOneByAggrementToken(token);
+		 System.out.println(subsRepository.findAll().toString());
+		 SubscriptionRequestDTO subDTO = new SubscriptionRequestDTO();
+		 subDTO.setName(sub.getName());
+		 subDTO.setDescription(sub.getDescription());
+		 
+		 return subDTO;
+	 }
+	 
 }

@@ -23,7 +23,7 @@ import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.OAuthTokenCredential;
 import com.paypal.base.rest.PayPalRESTException;
 import com.sep.paypal.DTO.RegistrationDTO;
-import com.sep.paypal.DTO.SubscriptionDTO;
+import com.sep.paypal.DTO.SubscriptionRequestDTO;
 import com.sep.paypal.model.PaymentOrder;
 import com.sep.paypal.model.PaymentOrderStatus;
 import com.sep.paypal.model.PaymentRequest;
@@ -82,8 +82,8 @@ public class PayPalService {
 		payment.setTransactions(transactions);
 				
 		RedirectUrls redirectUrls = new RedirectUrls();
-		redirectUrls.setCancelUrl(KP_URL+"/cancel.html?id=" + Long.toString(po.getId()));
-		redirectUrls.setReturnUrl(KP_URL+"/confirmPayment.html");
+		redirectUrls.setCancelUrl(KP_URL+"/cancel.html?id=" + po.getId());
+		redirectUrls.setReturnUrl(KP_URL+"/confirmPayment.html?id=" + po.getId());
 		payment.setRedirectUrls(redirectUrls);
 				
 		payment = payment.create(getApiContext(seller.getPaypalClientId(), seller.getPaypalSecret()));
@@ -101,6 +101,7 @@ public class PayPalService {
 		Seller seller = po.getSeller();
 		
 		Payment payment = new Payment();
+		
 		payment.setId(paymentId);
 		PaymentExecution paymentExecute = new PaymentExecution();
 		paymentExecute.setPayerId(payerId);
@@ -119,10 +120,7 @@ public class PayPalService {
 		return payment;
 	}
 
-	public void createSubscription(SubscriptionDTO subsDTO) throws PayPalRESTException{
-		
-	}
-	
+
 	private APIContext getApiContext(String clientId, String clientSecret) throws PayPalRESTException {
 		
 		Map<String, String> configMap = new HashMap<>();
@@ -133,7 +131,7 @@ public class PayPalService {
 		return context;
 	}
 	
-	public void canclePaymentOrder(long id) {
+	public void canclePaymentOrder(String id) {
 		PaymentOrder po = paymentOrderRepository.findOneById(id);
 		po.setStatus(PaymentOrderStatus.CANCELED);
 		logger.info("Paypal orderId="+ id +" canceled");
