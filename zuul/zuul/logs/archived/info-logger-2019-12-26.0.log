@@ -1,6 +1,0 @@
-2019-12-26 14:30:48,683 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-26 14:31:28,187 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started ZuulApplication in 46.569 seconds (JVM running for 47.614)
-2019-12-26 15:58:30,226 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-26 15:58:56,213 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started ZuulApplication in 35.484 seconds (JVM running for 37.128)
-2019-12-26 16:22:43,573 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2019-12-26 16:23:15,673 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started ZuulApplication in 38.076 seconds (JVM running for 39.064)

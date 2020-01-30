@@ -1,0 +1,4 @@
+2020-01-21 01:30:51,547 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-21 01:31:01,377 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started EurekaApplication in 10.951 seconds (JVM running for 17650.882)
+2020-01-21 14:50:51,574 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-21 14:51:24,348 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started EurekaApplication in 38.259 seconds (JVM running for 39.403)
