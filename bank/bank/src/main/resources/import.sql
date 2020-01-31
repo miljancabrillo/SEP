@@ -1,1 +1,1 @@
-INSERT INTO seller (id, merchant_id, merchant_password, email) VALUES (1, '1', 'MARKO12345', 'marko@gmail.com');
+INSERT INTO seller (id, merchant_id, merchant_password, email) VALUES (1, '2', 'MARKO12345', 'marko@gmail.com');

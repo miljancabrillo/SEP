@@ -40,6 +40,9 @@ public class PaymentService {
 		//treba uraditi sve provjere da li je validan merchatId i merchantPassword
 		
 		UserAccount payee = userAccountRepository.findOneById(Long.parseLong(paymentRequest.getMerchantId()));
+		if(payee == null ) return null;
+		if(!payee.getPassword().equals(paymentRequest.getMerchantPassword())) return null;
+		
 		
 		Payment pt = new Payment();
 		pt.setPayee(payee);

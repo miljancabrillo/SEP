@@ -218,7 +218,7 @@ public class SubscriptionService {
 		sub.setStatus("cancled");
 		subsRepository.save(sub);
 		RestTemplate rt = new RestTemplate();
-		rt.postForLocation(sub.getFailureUrl(), null);
+		rt.postForLocation(sub.getFailureUrl()+"/"+sub.getId(), null);
 		return "success";
 	}
 	
@@ -239,7 +239,7 @@ public class SubscriptionService {
 		sub.setAggrementId(agreement.getId());
 		subsRepository.save(sub);
 		RestTemplate rt = new RestTemplate();
-		rt.postForLocation(sub.getSuccessUrl(), null);
+		rt.postForLocation(sub.getSuccessUrl()+"/"+sub.getId(), null);
 		return "success";
 	}
 	private APIContext getApiContext(String clientId, String clientSecret) throws PayPalRESTException {

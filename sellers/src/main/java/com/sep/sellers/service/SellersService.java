@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.sep.sellers.dto.PaymentRequestDTO;
+import com.sep.sellers.dto.PaymentResponseDTO;
 import com.sep.sellers.dto.RegistrationRequestDTO;
 import com.sep.sellers.dto.RegistrationResponseDTO;
 import com.sep.sellers.model.Payment;
@@ -92,20 +93,23 @@ public class SellersService {
 	public void confirmPayment(String paymentId, String status) {
 		Payment payment = paymentRepository.getOne(paymentId);
 		RestTemplate restTemplate = new RestTemplate();
-		if(status.equals("success")) restTemplate.postForLocation(payment.getSuccessUrl(), null);
-		if(status.equals("failure")) restTemplate.postForLocation(payment.getFailureUrl(), null);
+		if(status.equals("success")) restTemplate.postForLocation(payment.getSuccessUrl()+"/"+payment.getId(), null);
+		if(status.equals("failure")) restTemplate.postForLocation(payment.getFailureUrl()+"/"+payment.getId(), null);
 	}
 	
-	public String generatePaymentUrl(PaymentRequestDTO pr) {
+	public PaymentResponseDTO generatePaymentUrl(PaymentRequestDTO pr) {
 		//provjeriti da li postoji prodavac
 		Payment payment = new Payment();
 		payment.setFailureUrl(pr.getFailureUrl());
 		payment.setSuccessUrl(pr.getSuccessUrl());
 		payment = paymentRepository.save(payment);
-		return "https://localhost:8672/sellers/paymentType.html?token=" + generateToken(pr.getSellerId(), pr.getPrice(), pr.getCurrency(),-1,payment.getId());
 		
-	}
-	
+		PaymentResponseDTO prDTO = new PaymentResponseDTO();
+		prDTO.setId(payment.getId());
+		prDTO.setPaymentUrl("https://localhost:8672/sellers/paymentType.html?token=" + generateToken(pr.getSellerId(), pr.getPrice(), pr.getCurrency(),-1,payment.getId()));
+		
+		return prDTO;
+	}	
 	private String generateToken(long sellerId, float price, String currency, long regDataId, String sellersPaymentId) {
 	
 		Map<String, Object> claimsMap = new HashMap<>();

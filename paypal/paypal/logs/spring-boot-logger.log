@@ -8,3 +8,13 @@
 2020-01-31 01:07:59,716 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-5] Paypal order paypalId=PAYID-LYZW7YI84X896428Y207552S created sellerId=1
 2020-01-31 01:08:23,791 INFO com.sep.paypal.controller.PayPalController [https-jsse-nio-8200-exec-10] Paypal orderId=42d5055f-aee3-4881-99f1-d58fa815b890 canceled
 2020-01-31 01:08:23,813 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-10] Paypal orderId=42d5055f-aee3-4881-99f1-d58fa815b890 canceled
+2020-01-31 20:04:33,882 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 20:05:06,094 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started PaypalApplication in 41.419 seconds (JVM running for 42.831)
+2020-01-31 20:45:26,810 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-6] Paypal order paypalId=PAYID-LY2IHWA041099579T553352N created sellerId=1
+2020-01-31 20:46:13,546 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-1] Paypal order paypalId=PAYID-LY2IHWA041099579T553352N approved
+2020-01-31 20:46:38,467 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-1] Paypal order paypalId=PAYID-LY2IIIA28N642474J9056042 created sellerId=1
+2020-01-31 20:46:52,527 INFO com.sep.paypal.controller.PayPalController [https-jsse-nio-8200-exec-1] Paypal orderId=95be1d3e-3cb4-476b-9a00-1ae5dc74d43a canceled
+2020-01-31 20:46:52,544 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-1] Paypal orderId=95be1d3e-3cb4-476b-9a00-1ae5dc74d43a canceled
+2020-01-31 20:47:27,076 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-6] Paypal order paypalId=PAYID-LY2IIUA06U8212385019894M created sellerId=1
+2020-01-31 20:47:44,578 INFO com.sep.paypal.controller.PayPalController [https-jsse-nio-8200-exec-1] Paypal orderId=85e5a405-0853-42bb-afde-42fe3a3eb392 canceled
+2020-01-31 20:47:44,593 INFO com.sep.paypal.service.PayPalService [https-jsse-nio-8200-exec-1] Paypal orderId=85e5a405-0853-42bb-afde-42fe3a3eb392 canceled

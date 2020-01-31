@@ -42,6 +42,12 @@ public class RegistrationController {
 		if(seller != null) return new ResponseEntity<>("You are already registerd to paypal service!", HttpStatus.BAD_REQUEST);
 		
 		if(!StringUtils.isNotEmpty(regDTO.getClientId())) return new ResponseEntity<>("Filed client id is required!", HttpStatus.BAD_REQUEST);
+		try {
+			Long.parseLong(regDTO.getClientId());
+		} catch (NumberFormatException e) {
+			// TODO: handle exception
+			return new ResponseEntity<>("Filed client must be number!", HttpStatus.BAD_REQUEST);
+		}
 		if(!StringUtils.isNotEmpty(regDTO.getClientPassword())) return new ResponseEntity<>("Filed client password is required!", HttpStatus.BAD_REQUEST);
 		if(!isValid(regDTO.getEmail())) return new ResponseEntity<>("Mail not valid!", HttpStatus.BAD_REQUEST);
 		

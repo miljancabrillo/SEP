@@ -4,7 +4,7 @@ $(document).ready(function(){
 	
     $.ajax({
         type: "GET",
-        url: "https://localhost:8672/sellers/paymentTypes",
+        url: "https://localhost:8672/sellers/allPaymentTypes",
         contentType: "application/json",
         headers: {
             "Authorization": "Bearer "+getUrlParameter("token")

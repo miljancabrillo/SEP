@@ -45,3 +45,20 @@
 2020-01-31 13:37:33,096 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 31.853 seconds (JVM running for 32.92)
 2020-01-31 13:37:47,074 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-1] Bank orderId=1 created sellerId=1
 2020-01-31 13:37:56,735 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-7] Bank orderId=2 created sellerId=1
+2020-01-31 20:09:03,565 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 20:09:45,962 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 50.551 seconds (JVM running for 52.568)
+2020-01-31 21:02:35,985 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 21:02:51,450 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 21:03:08,034 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 21.743 seconds (JVM running for 23.119)
+2020-01-31 21:03:43,697 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 21:04:00,396 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 21.655 seconds (JVM running for 22.674)
+2020-01-31 21:04:52,061 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-3] Bank orderId=1 created sellerId=1
+2020-01-31 21:05:20,770 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-7] Bank orderId=1 successful
+2020-01-31 21:07:23,553 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-10] Bank orderId=2 created sellerId=1
+2020-01-31 21:07:33,689 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-2] Bank orderId=2 successful
+2020-01-31 21:09:07,585 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-9] Bank orderId=3 created sellerId=1
+2020-01-31 21:09:32,435 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-6] Bank orderId=3 failed
+2020-01-31 21:11:32,399 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-6] Bank orderId=4 created sellerId=2
+2020-01-31 21:11:46,920 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-5] Bank orderId=4 successful
+2020-01-31 21:13:15,748 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-2] Bank orderId=5 created sellerId=2
+2020-01-31 21:13:30,640 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-6] Bank orderId=5 successful

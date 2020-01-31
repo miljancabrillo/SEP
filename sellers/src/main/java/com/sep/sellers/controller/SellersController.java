@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sep.sellers.dto.PaymentRequestDTO;
+import com.sep.sellers.dto.PaymentResponseDTO;
 import com.sep.sellers.dto.RegistrationRequestDTO;
 import com.sep.sellers.dto.RegistrationResponseDTO;
 import com.sep.sellers.model.PaymentType;
@@ -49,7 +50,7 @@ public class SellersController {
 	}
 	
 	@PostMapping("/ncApi/paymentUrl")
-	public String payment(@RequestBody PaymentRequestDTO pr) {
+	public PaymentResponseDTO payment(@RequestBody PaymentRequestDTO pr) {
 		logger.info("Payment URL request sellerId=" + pr.getSellerId());
 		return sellersService.generatePaymentUrl(pr);
 	}
@@ -71,6 +72,11 @@ public class SellersController {
 	public ResponseEntity<List<PaymentType>> getPaymentTypes(){
 		Seller seller = sellersRepository.findOneById(tokenUtils.getSellerId());
 		return new ResponseEntity<>(seller.getPaymentTypes(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/allPaymentTypes")
+	public ResponseEntity<List<PaymentType>> getAllPaymentTypes(){
+		return new ResponseEntity<>(ptRepository.findAll(), HttpStatus.OK);
 	}
 	
 	@PostMapping("/cancelPayment")
