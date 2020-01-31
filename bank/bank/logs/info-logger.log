@@ -1,27 +1,47 @@
-2020-01-24 14:16:28,297 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2020-01-24 14:16:54,271 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 30.253 seconds (JVM running for 32.202)
-2020-01-24 14:39:06,269 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-6] Bank orderId=1 created sellerId=1
-2020-01-24 14:42:42,321 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-1] Bank orderId=1 successful
-2020-01-24 14:56:09,651 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-8] Bank orderId=2 created sellerId=1
-2020-01-24 15:06:56,708 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-4] Bank orderId=3 created sellerId=1
-2020-01-24 15:07:19,937 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-8] Bank orderId=3 successful
-2020-01-24 15:08:04,416 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-7] Bank orderId=5 created sellerId=1
-2020-01-24 15:08:22,336 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-4] Bank orderId=5 failed
-2020-01-24 15:19:09,496 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-1] Bank orderId=6 created sellerId=1
-2020-01-24 15:19:26,053 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-10] Bank orderId=6 successful
-2020-01-24 15:19:37,929 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-2] Bank orderId=7 created sellerId=1
-2020-01-24 15:20:54,113 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-7] Bank orderId=7 successful
-2020-01-24 15:21:07,591 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-8] Bank orderId=8 created sellerId=1
-2020-01-24 15:21:26,538 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-6] Bank orderId=8 failed
-2020-01-24 15:22:20,390 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-5] Bank orderId=9 created sellerId=1
-2020-01-24 15:22:45,322 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-3] Bank orderId=9 failed
-2020-01-24 15:38:43,575 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2020-01-24 15:39:07,609 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 28.121 seconds (JVM running for 29.852)
-2020-01-24 15:42:08,414 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-2] Bank orderId=1 created sellerId=1
-2020-01-24 15:42:28,645 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-7] Bank orderId=1 successful
-2020-01-24 15:45:23,214 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-1] Bank orderId=2 created sellerId=1
-2020-01-24 15:45:49,841 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-4] Bank orderId=2 failed
-2020-01-24 15:46:15,096 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-7] Bank orderId=3 created sellerId=1
-2020-01-24 15:46:31,610 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-3] Bank orderId=3 failed
-2020-01-24 15:58:17,159 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-5] Bank orderId=4 created sellerId=1
-2020-01-24 15:58:40,171 INFO com.sep.bank.controller.BankController [https-jsse-nio-8300-exec-9] Bank orderId=4 successful
+2020-01-31 01:29:57,010 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 01:30:15,021 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 01:30:43,911 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 33.302 seconds (JVM running for 34.821)
+2020-01-31 01:31:19,136 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 01:31:34,502 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 18.392 seconds (JVM running for 19.521)
+2020-01-31 01:31:56,553 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-4] Bank orderId=1 created sellerId=1
+2020-01-31 01:34:44,857 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 01:35:01,246 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 19.341 seconds (JVM running for 20.411)
+2020-01-31 01:36:47,926 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-8] Bank orderId=2 created sellerId=1
+2020-01-31 01:38:57,816 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 01:39:01,955 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 4.734 seconds (JVM running for 261.115)
+2020-01-31 01:39:34,198 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 01:39:56,430 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 39.513 seconds (JVM running for 42.694)
+2020-01-31 01:40:36,805 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-3] Bank orderId=1 created sellerId=1
+2020-01-31 01:41:53,303 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 01:42:10,671 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 20.814 seconds (JVM running for 21.833)
+2020-01-31 01:43:05,872 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-3] Bank orderId=1 created sellerId=1
+2020-01-31 01:43:53,765 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-2] Bank orderId=2 created sellerId=1
+2020-01-31 13:04:51,410 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 13:05:13,581 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 25.041 seconds (JVM running for 26.084)
+2020-01-31 13:08:27,350 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-7] Bank orderId=1 created sellerId=1
+2020-01-31 13:09:22,848 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-6] Bank orderId=2 created sellerId=1
+2020-01-31 13:10:19,623 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-9] Bank orderId=3 created sellerId=1
+2020-01-31 13:14:14,378 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-7] Bank orderId=5 created sellerId=1
+2020-01-31 13:15:15,705 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-4] Bank orderId=6 created sellerId=1
+2020-01-31 13:19:25,689 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 13:19:52,304 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 33.098 seconds (JVM running for 34.788)
+2020-01-31 13:19:54,183 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 13:21:47,202 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-5] Bank orderId=1 created sellerId=1
+2020-01-31 13:22:57,061 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-1] Bank orderId=2 created sellerId=1
+2020-01-31 13:23:43,959 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-10] Bank orderId=3 created sellerId=1
+2020-01-31 13:24:51,146 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 13:25:07,071 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 19.275 seconds (JVM running for 20.658)
+2020-01-31 13:25:42,221 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-3] Bank orderId=1 created sellerId=1
+2020-01-31 13:26:49,763 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-9] Bank orderId=2 created sellerId=1
+2020-01-31 13:28:59,608 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 13:29:29,532 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 34.254 seconds (JVM running for 35.423)
+2020-01-31 13:30:27,449 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-3] Bank orderId=1 created sellerId=1
+2020-01-31 13:31:15,272 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-10] Bank orderId=2 created sellerId=1
+2020-01-31 13:33:55,083 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 13:34:34,338 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 42.216 seconds (JVM running for 43.227)
+2020-01-31 13:35:15,077 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-2] Bank orderId=1 created sellerId=1
+2020-01-31 13:35:43,659 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-5] Bank orderId=2 created sellerId=1
+2020-01-31 13:37:07,105 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 13:37:33,096 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BankApplication in 31.853 seconds (JVM running for 32.92)
+2020-01-31 13:37:47,074 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-1] Bank orderId=1 created sellerId=1
+2020-01-31 13:37:56,735 INFO com.sep.bank.service.BankService [https-jsse-nio-8300-exec-7] Bank orderId=2 created sellerId=1

@@ -3,12 +3,15 @@ package com.sep.acquirer_bank.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sep.acquirer_bank.model.ExecutePayment;
+import com.sep.acquirer_bank.model.PaymentStatus;
 import com.sep.acquirer_bank.model.AcquirerRequest;
 import com.sep.acquirer_bank.model.AcquirerResponse;
 import com.sep.acquirer_bank.service.PaymentService;
@@ -28,6 +31,16 @@ public class PaymentController {
 	@PostMapping("/executePayment")
 	public String executePayment(@RequestBody ExecutePayment executePayment) {
 		return paymentService.executePayment(executePayment);
+	}
+	
+	@GetMapping("/checkStatus/{paymentId}")
+	public String checkStatus(@PathVariable("paymentId") long paymentId) {
+		return paymentService.checkStatus(paymentId);
+	}
+	
+	@GetMapping("/cancelPayment/{paymentId}")
+	public void cancelPayment(@PathVariable("paymentId") long paymentId) {
+		paymentService.setPaymentStatus(PaymentStatus.FAILED, paymentId);
 	}
 	
 }

@@ -8,14 +8,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.sep.sellers.dto.PaymentRequestDTO;
 import com.sep.sellers.dto.RegistrationRequestDTO;
 import com.sep.sellers.dto.RegistrationResponseDTO;
+import com.sep.sellers.model.Payment;
 import com.sep.sellers.model.PaymentType;
 import com.sep.sellers.model.RegistrationData;
 import com.sep.sellers.model.RegistrationStatus;
 import com.sep.sellers.model.Seller;
+import com.sep.sellers.repository.PaymentRepository;
 import com.sep.sellers.repository.PaymentTypeRepository;
 import com.sep.sellers.repository.RegistrationDataRepository;
 import com.sep.sellers.repository.SellersRepository;
@@ -43,6 +46,9 @@ public class SellersService {
 	@Autowired
 	TokenUtils tokenUtils;
 	
+	@Autowired
+	PaymentRepository paymentRepository;
+	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	
@@ -57,7 +63,7 @@ public class SellersService {
 		
 		
 		logger.info("Registration link sellerId=" + seller.getId());
-		String registrationUrl = "https://localhost:8672/sellers/registration.html?token="+generateToken(seller.getId(), 0, "", regData.getId());
+		String registrationUrl = "https://localhost:8672/sellers/registration.html?token="+generateToken(seller.getId(), 0, "", regData.getId(),"");
 		RegistrationResponseDTO responseDTO = new RegistrationResponseDTO(seller.getId(), registrationUrl);
 		return responseDTO;
 		
@@ -81,18 +87,32 @@ public class SellersService {
 		
 		return "success";
 	}
-
-	public String generatePaymentUrl(PaymentRequestDTO pr) {
-		//provjeriti da li postoji prodavac
-		return "https://localhost:8672/sellers/paymentType.html?token=" + generateToken(pr.getSellerId(), pr.getPrice(), pr.getCurrency(),-1);
+	
+	//potvrda pajmenta
+	public void confirmPayment(String paymentId, String status) {
+		Payment payment = paymentRepository.getOne(paymentId);
+		RestTemplate restTemplate = new RestTemplate();
+		if(status.equals("success")) restTemplate.postForLocation(payment.getSuccessUrl(), null);
+		if(status.equals("failure")) restTemplate.postForLocation(payment.getFailureUrl(), null);
 	}
 	
-	private String generateToken(long sellerId, float price, String currency, long regDataId) {
+	public String generatePaymentUrl(PaymentRequestDTO pr) {
+		//provjeriti da li postoji prodavac
+		Payment payment = new Payment();
+		payment.setFailureUrl(pr.getFailureUrl());
+		payment.setSuccessUrl(pr.getSuccessUrl());
+		payment = paymentRepository.save(payment);
+		return "https://localhost:8672/sellers/paymentType.html?token=" + generateToken(pr.getSellerId(), pr.getPrice(), pr.getCurrency(),-1,payment.getId());
+		
+	}
+	
+	private String generateToken(long sellerId, float price, String currency, long regDataId, String sellersPaymentId) {
 	
 		Map<String, Object> claimsMap = new HashMap<>();
 		claimsMap.put("sellerId", sellerId);
 		claimsMap.put("price", price);
 		claimsMap.put("currency", currency);
+		claimsMap.put("sellersPaymentId", sellersPaymentId);
 		if(regDataId != -1) claimsMap.put("regDataId", regDataId);
 		
 		Long now = System.currentTimeMillis();

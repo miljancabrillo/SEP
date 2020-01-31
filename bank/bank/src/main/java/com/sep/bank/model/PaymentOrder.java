@@ -34,5 +34,7 @@ public class PaymentOrder {
 	private double amount;
 	
 	private PaymentOrderStatus status = PaymentOrderStatus.CREATED;
+	
+	private String  sellersPaymentId;
 
 }

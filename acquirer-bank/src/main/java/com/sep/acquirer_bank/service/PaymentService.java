@@ -49,9 +49,10 @@ public class PaymentService {
 		pt.setSuccesUrl(paymentRequest.getSuccesUrl());
 		pt.setFailedUrl(paymentRequest.getFailedUrl());
 		pt.setErrorUrl(paymentRequest.getErrorUrl());
+		pt.setStatus(PaymentStatus.CREATED);
 		pt = paymentRepository.save(pt);
 		
-		return new AcquirerResponse(1,"https://localhost:11000/payment.html?id=" + Long.toString(pt.getId()));
+		return new AcquirerResponse(pt.getId(),"https://localhost:11000/payment.html?id=" + Long.toString(pt.getId()));
 	}
 	
 	public String executePayment(ExecutePayment ep) {
@@ -103,5 +104,20 @@ public class PaymentService {
 			
 		}
 		
+	}
+	
+	public String checkStatus(long paymentId) {
+		Payment payment = paymentRepository.findOneById(paymentId);
+		if(payment == null) return "failed";
+		if(payment.getStatus() == PaymentStatus.CREATED) return "created";
+		if(payment.getStatus() == PaymentStatus.FAILED) return "failed";
+		return "successful";
+	}
+	
+	public void setPaymentStatus(PaymentStatus status, long paymentId) {
+		Payment payment = paymentRepository.findOneById(paymentId);
+		if(payment == null) return;
+		payment.setStatus(status);
+		paymentRepository.save(payment);
 	}
 }

@@ -14,6 +14,7 @@ import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.paypal.api.payments.Agreement;
 import com.paypal.api.payments.AgreementStateDescriptor;
@@ -65,7 +66,8 @@ public class SubscriptionService {
 		Seller seller = sellerRepository.getOne(subsDTO.getSellerId());
 		Subscription subscription = new Subscription();
 		subscription.setSellerId(seller.getId());
-		subscription.setConfirmationUrl(subsDTO.getConfirmationURL());
+		subscription.setSuccessUrl(subsDTO.getSuccessUrl());
+		subscription.setFailureUrl(subsDTO.getFailureUrl());
 		subscription.setName(subsDTO.getName());
 		subscription.setDescription(subsDTO.getDescription());
 		subscription = subsRepository.save(subscription);
@@ -215,6 +217,8 @@ public class SubscriptionService {
 	
 		sub.setStatus("cancled");
 		subsRepository.save(sub);
+		RestTemplate rt = new RestTemplate();
+		rt.postForLocation(sub.getFailureUrl(), null);
 		return "success";
 	}
 	
@@ -234,6 +238,8 @@ public class SubscriptionService {
 		sub.setStatus("active");
 		sub.setAggrementId(agreement.getId());
 		subsRepository.save(sub);
+		RestTemplate rt = new RestTemplate();
+		rt.postForLocation(sub.getSuccessUrl(), null);
 		return "success";
 	}
 	private APIContext getApiContext(String clientId, String clientSecret) throws PayPalRESTException {

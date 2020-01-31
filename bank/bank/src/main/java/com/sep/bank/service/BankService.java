@@ -1,11 +1,14 @@
 package com.sep.bank.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,8 +24,10 @@ import com.sep.bank.model.PaymentOrderStatus;
 import com.sep.bank.model.PaymentRequest;
 
 @Service
+@EnableScheduling
 public class BankService {
 	
+	private static String SELLERS_URL = "https://localhost:8672/sellers/confirmPayment/";
 	private static String BANK_URL = "https://localhost:11000";
 	private static String KP_URL = "https://localhost:8672/bank";
 	
@@ -67,6 +72,7 @@ public class BankService {
 
 		
 		paymentOrder.setPaymentId(response.getBody().getPaymentId());
+		paymentOrder.setSellersPaymentId(tokenUtils.getSellersPaymentId());
 		paymentOrderRepository.save(paymentOrder);
 		
 		return response.getBody();
@@ -76,6 +82,12 @@ public class BankService {
 		PaymentOrder po = paymentOrderRepository.findOneById(id);
 		po.setStatus(status);
 		paymentOrderRepository.save(po);
+		RestTemplate rt = new RestTemplate();
+		if(status == PaymentOrderStatus.PAID) {
+			rt.postForLocation(SELLERS_URL + po.getSellersPaymentId() + "/success", null);
+		}else if(status == PaymentOrderStatus.FAILED) {
+			rt.postForLocation(SELLERS_URL + po.getSellersPaymentId() + "/failure", null);
+		}
 	}
 	
 
@@ -85,7 +97,29 @@ public class BankService {
 			seller.setEmail(rDTO.getEmail());
 			seller.setMerchantId(rDTO.getClientId());
 			seller.setMerchantPassword(rDTO.getClientPassword());
-			sellerRepository.save(seller);
+			sellerRepository.save(seller); 
+	}
+	 
+	@Scheduled(fixedRate = 6000)
+	public void checkStatus() {
+		List<PaymentOrder> orders = paymentOrderRepository.findAll();
+		if(orders == null) return;
+		for (PaymentOrder paymentOrder : orders) {
+			if(paymentOrder.getStatus() != PaymentOrderStatus.CREATED) continue;
+			ResponseEntity<String> response = restTemplate.getForEntity(BANK_URL + "/checkStatus/" + Long.toString(paymentOrder.getPaymentId()), String.class);
+			System.out.println(response.getBody());
+			RestTemplate rt = new RestTemplate();
+
+			if(response.getBody().equals("failed")) {
+				paymentOrder.setStatus(PaymentOrderStatus.FAILED);
+				rt.postForLocation(SELLERS_URL + paymentOrder.getSellersPaymentId() + "/failure", null);
+			}
+			if(response.getBody().equals("successful")) {
+				paymentOrder.setStatus(PaymentOrderStatus.PAID);
+				rt.postForLocation(SELLERS_URL + paymentOrder.getSellersPaymentId() + "/success", null);
+			}
+			paymentOrderRepository.save(paymentOrder);
+		}
 	}
 }
 

@@ -30,6 +30,7 @@ import com.sep.bitcoin.utils.TokenUtils;
 @EnableScheduling
 public class BitcoinService {
 
+	private static String SELLERS_URL = "https://localhost:8672/sellers/confirmPayment/";
 	private static String KP_URL = "https://localhost:8672/bitcoin";
 	private static String COINGATE_URL = "https://api-sandbox.coingate.com/v2/orders/";
 
@@ -53,6 +54,7 @@ public class BitcoinService {
 		po.setPriceAmount(pr.getPrice());
 		po.setPriceCurrency(pr.getCurrency());
 		po.setReceiveCurrency(pr.getCurrency());
+		po.setSellersPaymentId(tokenUtils.getSellersPaymentId());
 		po = paymentOrderRepository.save(po);
 
 		po.setCancelUrl(KP_URL + "/cancel.html?id=" + po.getOrderId());
@@ -121,6 +123,11 @@ public class BitcoinService {
 			    logger.info("Bitcoin orderId=" + po.getOrderId() +" status=" + response.getBody().getStatus());
 				po.setStatus(response.getBody().getStatus());
 				
+				if(response.getBody().getStatus().equals("paid")) {
+					rt.postForLocation(SELLERS_URL + po.getSellersPaymentId() + "/success", null);
+				}else {
+					rt.postForLocation(SELLERS_URL + po.getSellersPaymentId() + "/failure", null);
+				}
 				//ovjde bi trebalo obavjestiti nc ako je placanje uspjeno
 				
 				paymentOrderRepository.save(po);
@@ -133,6 +140,12 @@ public class BitcoinService {
 		PaymentOrder po = paymentOrderRepository.findOneByOrderId(poId);
 		po.setStatus(status);
 		paymentOrderRepository.save(po);
+		RestTemplate rt = new RestTemplate();
+		if(status.equals("paid")) {
+			rt.postForLocation(SELLERS_URL + po.getSellersPaymentId() + "/success", null);
+		}else {
+			rt.postForLocation(SELLERS_URL + po.getSellersPaymentId() + "/failure", null);
+		}
 	}
 	
 	 public void register(RegistrationDTO rDTO) {
@@ -141,6 +154,5 @@ public class BitcoinService {
 			seller.setEmail(rDTO.getEmail());
 			seller.setAccesToken(rDTO.getAccessToken());
 			sellerRepository.save(seller);
-		 }
-	
+	 }
 }

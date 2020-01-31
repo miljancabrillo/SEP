@@ -35,6 +35,16 @@ public class TokenUtils {
 		return paymentRequest;
 	}
 	
+	public String getSellersPaymentId() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		String token = authentication.getDetails().toString();
+		Map<String,Object> claims = getTokenClaims(token);
+		
+		return claims.get("sellersPaymentId").toString();
+	}
+	
+	
 	public long getSellerId() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		

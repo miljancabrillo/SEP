@@ -1,3 +1,6 @@
+var payPressed = false;
+
+
 $(document).ready(function(){
 
     $(".form-text").each(function(){
@@ -43,6 +46,8 @@ $(document).ready(function(){
         cardData.cardHolderName = $("#cardHolderName").val();
         cardData.expirationDate = $("#expirationDate").val();
 
+        payPressed = true;
+        
         $.ajax({
             type: "POST",
             url: "https://localhost:11000/executePayment",
@@ -81,3 +86,37 @@ $(document).ready(function(){
     };
 
 })
+
+
+$(window).on("unload", function(e) {
+	
+	if(!payPressed){
+		$.ajax({
+            type: "GET",
+	        async: false,
+            url: "https://localhost:11000/cancelPayment/"+getUrlParameter("id"),
+            contentType: "application/json",
+            success: function(data){
+            	console.log(data);
+            }
+            
+          });
+	}
+
+    function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+    
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+    
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+
+});
+

@@ -9,12 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentRequestDTO {
+public class SubscriptionResponseDTO {
 
-	private long sellerId;
-	private float price;
-	private String currency;
-	private String successUrl;
-	private String failureUrl;	
+	private String subscriptionId;
+	private String paymentUrl;
+	private String cancelUrl;
 	
 }

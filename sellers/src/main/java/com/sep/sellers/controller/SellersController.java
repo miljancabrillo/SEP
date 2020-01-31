@@ -18,8 +18,11 @@ import com.sep.sellers.dto.PaymentRequestDTO;
 import com.sep.sellers.dto.RegistrationRequestDTO;
 import com.sep.sellers.dto.RegistrationResponseDTO;
 import com.sep.sellers.model.PaymentType;
+import com.sep.sellers.model.Seller;
 import com.sep.sellers.repository.PaymentTypeRepository;
+import com.sep.sellers.repository.SellersRepository;
 import com.sep.sellers.service.SellersService;
+import com.sep.sellers.utils.TokenUtils;
 
 
 @RestController("/")
@@ -31,7 +34,14 @@ public class SellersController {
 	@Autowired
 	PaymentTypeRepository ptRepository;
 	
+	@Autowired 
+	SellersRepository sellersRepository;
+
+	@Autowired
+	TokenUtils tokenUtils;
+	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	
 	@PostMapping("/ncApi/registrationUrl")
 	public ResponseEntity<RegistrationResponseDTO> registration(RegistrationRequestDTO requestDTO){
@@ -44,6 +54,12 @@ public class SellersController {
 		return sellersService.generatePaymentUrl(pr);
 	}
 	
+	@PostMapping("/confirmPayment/{paymentId}/{status}")
+	public Object confirmPayment(@PathVariable("paymentId") String paymentId, @PathVariable("status") String status) {
+		sellersService.confirmPayment(paymentId, status);
+		return null;
+	}
+	
 	@SuppressWarnings("rawtypes")
 	@GetMapping("/confirmRegistration/{paymentTypeId}")
 	public ResponseEntity confirmRegistration(@PathVariable("paymentTypeId") long paymentTypeId) {
@@ -53,6 +69,12 @@ public class SellersController {
 	
 	@GetMapping("/paymentTypes")
 	public ResponseEntity<List<PaymentType>> getPaymentTypes(){
-		return new ResponseEntity<>(ptRepository.findAll(), HttpStatus.OK);
+		Seller seller = sellersRepository.findOneById(tokenUtils.getSellerId());
+		return new ResponseEntity<>(seller.getPaymentTypes(), HttpStatus.OK);
+	}
+	
+	@PostMapping("/cancelPayment")
+	public void cancelPayment(){
+		sellersService.confirmPayment(tokenUtils.getSellersPaymentId(), "failure");
 	}
 }

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.paypal.api.payments.Amount;
 import com.paypal.api.payments.Payer;
@@ -35,6 +36,7 @@ import com.sep.paypal.utils.TokenUtils;
 @Service
 public class PayPalService {
 	
+	private static String SELLERS_URL = "https://localhost:8672/sellers/confirmPayment/";
 	private static String KP_URL = "https://localhost:8672/paypal";
 
 	@Value("${paypal.mode}")
@@ -59,6 +61,7 @@ public class PayPalService {
 		po.setSeller(seller);
 		po.setPrice(pr.getPrice());
 		po.setCurrency(pr.getCurrency());
+		po.setSellersPaymentId(tokenUtils.getSellersPaymentId());
 		paymentOrderRepository.save(po);
 		
 		Amount amount = new Amount();
@@ -108,12 +111,17 @@ public class PayPalService {
 		
 		payment = payment.execute(getApiContext(seller.getPaypalClientId(), seller.getPaypalSecret()), paymentExecute);
 		
+		RestTemplate rt = new RestTemplate();
+		
 		if(payment.getState().equals("approved")) {
    		    logger.info("Paypal order paypalId="+ paymentId +" approved");
 			po.setStatus(PaymentOrderStatus.PAID);
+			rt.postForLocation(SELLERS_URL + po.getSellersPaymentId() + "/success", null);
 		}else {
    		    logger.info("Paypal order paypalId="+ paymentId +" failed");
 			po.setStatus(PaymentOrderStatus.FAILED);
+			rt.postForLocation(SELLERS_URL + po.getSellersPaymentId() + "/failure", null);
+
 		}
 		paymentOrderRepository.save(po);
 		
@@ -136,6 +144,8 @@ public class PayPalService {
 		po.setStatus(PaymentOrderStatus.CANCELED);
 		logger.info("Paypal orderId="+ id +" canceled");
 		paymentOrderRepository.save(po);
+		RestTemplate rt = new RestTemplate();
+		rt.postForLocation(SELLERS_URL + po.getSellersPaymentId() + "/failure", null);
 	}
 
 	public Double getPaymentOrderPrice(String paymentOrderId) {

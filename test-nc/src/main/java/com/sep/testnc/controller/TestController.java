@@ -2,7 +2,6 @@ package com.sep.testnc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +25,8 @@ public class TestController {
 	@PostMapping("/testPayment")
 	public String testPayment(@RequestBody float price) {
 		
-		PaymentRequestDTO pr = new PaymentRequestDTO(1, price, "USD");
+		PaymentRequestDTO pr = new PaymentRequestDTO(1, price, "USD","http://localhost:8080/successUrl",
+				"http://localhost:8080/failureUrl");
 		ResponseEntity<String> response = restTemplate.postForEntity("https://localhost:8673/sellers/ncApi/paymentUrl", pr, String.class);
 		
 		return response.getBody();
@@ -45,10 +45,22 @@ public class TestController {
 	@GetMapping("/testSubscription")
 	public String testSubscription() {
 		
-		SubscriptionDTO subsDTO = new SubscriptionDTO(1, "sub", "desc", "FIXED", "MONTH", "2", "2", "20", "USD", "AA");
+		SubscriptionDTO subsDTO = new SubscriptionDTO(1, "subscription", "description", "FIXED", "MONTH", "2", "2", "20", "USD", "AA");
 		ResponseEntity<String> response = restTemplate.postForEntity("https://localhost:8673/paypal/ncApi/createSubscription",
 				subsDTO, String.class);
 
 		return response.getBody().toString();
 	}
+
+	@GetMapping("/successUrl")
+	public void successUrl() {
+		System.out.println("successUrl");
+	}
+	
+	@GetMapping("/failureUrl")
+	public void failureUrl() {
+		System.out.println("failureUrl");
+	}
 }
+
+

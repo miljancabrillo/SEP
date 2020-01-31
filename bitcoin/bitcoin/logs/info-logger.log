@@ -1,15 +1,59 @@
-2020-01-22 17:32:32,466 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2020-01-22 17:32:50,466 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 21.908 seconds (JVM running for 23.229)
-2020-01-22 17:34:44,289 INFO com.sep.bitcoin.service.BitcoinService [https-jsse-nio-8400-exec-1] Bitcoin orderId=8264f7ea-b0e2-4f7c-b5ed-0a09abd48631 sellerId=1 created
-2020-01-22 17:34:49,647 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8264f7ea-b0e2-4f7c-b5ed-0a09abd48631 status=new
-2020-01-22 17:35:49,737 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8264f7ea-b0e2-4f7c-b5ed-0a09abd48631 status=paid
-2020-01-22 17:39:23,978 INFO com.sep.bitcoin.service.BitcoinService [https-jsse-nio-8400-exec-7] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 sellerId=1 created
-2020-01-22 17:39:50,900 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
-2020-01-22 17:40:51,161 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
-2020-01-22 17:41:52,543 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
-2020-01-22 17:42:49,796 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
-2020-01-22 17:43:49,675 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
-2020-01-22 17:44:49,718 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
-2020-01-22 17:45:49,859 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
-2020-01-22 17:46:50,002 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
-2020-01-22 17:47:49,697 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=8b784299-203b-4077-83c9-61463394ae37 status=pending
+2020-01-30 22:25:53,817 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-30 22:26:25,934 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 38.106 seconds (JVM running for 39.908)
+2020-01-30 23:33:54,011 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-30 23:33:59,257 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 6.768 seconds (JVM running for 4093.135)
+2020-01-30 23:56:11,664 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-30 23:56:14,989 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 3.853 seconds (JVM running for 5428.835)
+2020-01-30 23:57:26,755 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-30 23:57:30,140 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 3.882 seconds (JVM running for 5503.984)
+2020-01-30 23:57:39,465 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-30 23:57:42,563 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 3.583 seconds (JVM running for 5516.408)
+2020-01-30 23:58:14,399 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-30 23:58:17,132 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 3.251 seconds (JVM running for 5550.976)
+2020-01-30 23:59:49,373 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 00:00:27,683 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 00:00:30,742 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 3.51 seconds (JVM running for 5684.582)
+2020-01-31 00:03:29,633 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 00:03:32,188 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 3.073 seconds (JVM running for 5866.024)
+2020-01-31 00:06:06,197 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 00:06:23,681 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 20.558 seconds (JVM running for 21.613)
+2020-01-31 00:07:04,741 INFO com.sep.bitcoin.service.BitcoinService [https-jsse-nio-8400-exec-8] Bitcoin orderId=b50959ab-0e69-43d8-8913-1fd9cdfba0a2 sellerId=1 created
+2020-01-31 00:07:22,115 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=b50959ab-0e69-43d8-8913-1fd9cdfba0a2 status=paid
+2020-01-31 00:08:21,907 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=b50959ab-0e69-43d8-8913-1fd9cdfba0a2 status=paid
+2020-01-31 00:09:22,773 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 00:09:37,885 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 17.998 seconds (JVM running for 19.011)
+2020-01-31 00:11:38,411 INFO com.sep.bitcoin.service.BitcoinService [https-jsse-nio-8400-exec-5] Bitcoin orderId=0a4edbc7-ed94-46ff-84ca-f7c965db6682 sellerId=1 created
+2020-01-31 00:12:37,682 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=0a4edbc7-ed94-46ff-84ca-f7c965db6682 status=paid
+2020-01-31 00:21:52,608 INFO com.sep.bitcoin.service.BitcoinService [https-jsse-nio-8400-exec-5] Bitcoin orderId=68da744f-5e96-49dd-99e3-b19459d224b6 sellerId=1 created
+2020-01-31 00:22:38,220 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=0a4edbc7-ed94-46ff-84ca-f7c965db6682 status=paid
+2020-01-31 00:26:43,127 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 00:26:58,612 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 19.051 seconds (JVM running for 20.174)
+2020-01-31 00:27:49,592 INFO com.sep.bitcoin.service.BitcoinService [https-jsse-nio-8400-exec-9] Bitcoin orderId=e05938d4-c6ca-491d-8a95-4af6b2750863 sellerId=1 created
+2020-01-31 00:27:58,381 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=e05938d4-c6ca-491d-8a95-4af6b2750863 status=paid
+2020-01-31 00:28:58,355 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=e05938d4-c6ca-491d-8a95-4af6b2750863 status=paid
+2020-01-31 00:29:58,370 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=e05938d4-c6ca-491d-8a95-4af6b2750863 status=paid
+2020-01-31 00:30:58,355 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=e05938d4-c6ca-491d-8a95-4af6b2750863 status=paid
+2020-01-31 00:31:40,677 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 00:31:49,544 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 00:32:04,864 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 18.128 seconds (JVM running for 19.18)
+2020-01-31 00:33:12,677 INFO com.sep.bitcoin.service.BitcoinService [https-jsse-nio-8400-exec-3] Bitcoin orderId=fd7d75fc-8b0f-4fcd-9c7a-5a28ace009c9 sellerId=1 created
+2020-01-31 00:34:04,523 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=fd7d75fc-8b0f-4fcd-9c7a-5a28ace009c9 status=paid
+2020-01-31 00:36:23,688 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 00:37:00,427 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 40.475 seconds (JVM running for 41.474)
+2020-01-31 00:37:20,616 INFO com.sep.bitcoin.service.BitcoinService [https-jsse-nio-8400-exec-10] Bitcoin orderId=76a19f8a-cd63-40b5-a5aa-a55a80893d01 sellerId=1 created
+2020-01-31 00:37:58,789 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=76a19f8a-cd63-40b5-a5aa-a55a80893d01 status=paid
+2020-01-31 00:38:58,795 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=76a19f8a-cd63-40b5-a5aa-a55a80893d01 status=paid
+2020-01-31 00:39:58,637 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=76a19f8a-cd63-40b5-a5aa-a55a80893d01 status=paid
+2020-01-31 00:39:59,831 INFO com.sep.bitcoin.service.BitcoinService [https-jsse-nio-8400-exec-3] Bitcoin orderId=a0d8b604-a348-44b0-8605-b74ee864e2f6 sellerId=1 created
+2020-01-31 00:41:58,147 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 00:42:13,144 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 18.108 seconds (JVM running for 19.099)
+2020-01-31 00:42:28,659 INFO com.sep.bitcoin.service.BitcoinService [https-jsse-nio-8400-exec-5] Bitcoin orderId=1aedcc2e-631d-4aca-ae52-7768ab35fb52 sellerId=1 created
+2020-01-31 00:43:12,447 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=1aedcc2e-631d-4aca-ae52-7768ab35fb52 status=paid
+2020-01-31 00:43:58,071 INFO com.sep.bitcoin.service.BitcoinService [https-jsse-nio-8400-exec-2] Bitcoin orderId=edad8d4b-ebf1-4ad3-a94e-c8a6b73da2ce sellerId=1 created
+2020-01-31 00:44:12,564 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=edad8d4b-ebf1-4ad3-a94e-c8a6b73da2ce status=invalid
+2020-01-31 00:45:31,298 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-01-31 00:45:49,197 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BitcoinApplication in 21.513 seconds (JVM running for 22.801)
+2020-01-31 00:47:26,493 INFO com.sep.bitcoin.service.BitcoinService [https-jsse-nio-8400-exec-4] Bitcoin orderId=0c7c6244-133a-43c7-88d6-3da7efc68c1a sellerId=1 created
+2020-01-31 00:47:48,360 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=0c7c6244-133a-43c7-88d6-3da7efc68c1a status=invalid
+2020-01-31 00:48:04,922 INFO com.sep.bitcoin.service.BitcoinService [https-jsse-nio-8400-exec-5] Bitcoin orderId=6d000f2e-8c56-452b-b7ff-9dfc2b35eac9 sellerId=1 created
+2020-01-31 00:48:48,467 INFO com.sep.bitcoin.service.BitcoinService [scheduling-1] Bitcoin orderId=6d000f2e-8c56-452b-b7ff-9dfc2b35eac9 status=paid

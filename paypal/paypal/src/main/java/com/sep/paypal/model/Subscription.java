@@ -33,4 +33,8 @@ public class Subscription {
 	private String name;
 	private String description;
 	
+	private String successUrl;
+	private String failureUrl;
+	
+	
 }

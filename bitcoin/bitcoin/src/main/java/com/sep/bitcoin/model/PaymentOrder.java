@@ -68,4 +68,6 @@ public class PaymentOrder {
 	
 	@JsonProperty("payment_url")
 	private String paymentUrl;
+	
+	private String sellersPaymentId;
 }
