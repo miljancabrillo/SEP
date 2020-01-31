@@ -73,6 +73,9 @@ public class PaymentService {
 				payer.setReservedFunds(pt.getAmount());
 				paymentRepository.save(pt);
 				userAccountRepository.save(payer);
+				UserAccount payee = pt.getPayee();
+				payee.setAvailableFunds(payee.getAvailableFunds() + pt.getAmount());
+				userAccountRepository.save(payee);
 				return pt.getSuccesUrl() + "?merchantOrderId="+ Long.toString(pt.getMerchantOrderId());
 				
 			}else {
@@ -95,6 +98,9 @@ public class PaymentService {
 			if(response.getBody().getStatus().equals("success")) {
 				//userAccountRepository.save(response.getBody().getUser());
 				pt.setPayeer(response.getBody().getUser());
+				UserAccount payee = pt.getPayee();
+				payee.setAvailableFunds(payee.getAvailableFunds() + pt.getAmount());
+				userAccountRepository.save(payee);
 				pt.setStatus(PaymentStatus.SUCCESSFUL);
 				paymentRepository.save(pt);
 				return pt.getSuccesUrl() + "?merchantOrderId="+ Long.toString(pt.getMerchantOrderId());
